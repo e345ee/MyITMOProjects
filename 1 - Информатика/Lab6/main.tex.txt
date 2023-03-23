@@ -1,0 +1,30 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[left=2cm,right=2cm, top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage[english,russian]{babel} 
+% обтекание картинки текстом \usepackage{wrapfig}
+ 
+% пакет входящий в коллекцию graphics 
+\usepackage{graphicx} 
+\usepackage{mathtools}
+\usepackage{mathdesign}
+% перечесление\usepackage{enumitem}
+%списки
+\usepackage{paralist}
+\usepackage{setspace}
+
+
+\graphicspath{} 
+
+%подписи рисунков и таблиц
+\usepackage{subcaption}
+
+
+\begin{document}
+
+\input{titul.tex}
+\input{kvant_1978_01}
+\input{kvant_1978_01_2.tex}
+
+\end{document}
