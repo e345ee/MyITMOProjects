@@ -65,11 +65,11 @@ public abstract class Abs_SpaceShip implements LobbyCreator {
     }
 
     protected int getPassengers() {
-        int count = 0;
+        int count1 = 0;
         for(Abs_Human i: lobby) {
-            count++;
+            count1++;
         }
-        return count;
+        return count1;
     }
 
     public int getBaseHp() {
