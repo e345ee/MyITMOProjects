@@ -22,9 +22,9 @@ public class Sniper extends Abs_Human implements Shoot {
             case 1:
                 var10000 = System.out;
                 var10001 = this.getName();
-                var10000.println(var10001 + " Стреляет с помощью: " + TypeOfBullet.BULLETX2);
+                var10000.println(var10001 + " Стреляет с  помощью: " + TypeOfBullet.BULLETX2);
                 o.setHp( (o.getHp() - 30));
-                System.out.println(o.getName() + " Получил урон равный: 30");
+                System.out.println(o.getName() + " Получил урон равный:  30");
                 break;
             case 2:
                 var10000 = System.out;
