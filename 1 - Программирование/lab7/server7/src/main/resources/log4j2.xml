@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Консольный аппендер -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <!-- Файловый аппендер -->
+        <File name="File" fileName="logs/server.log" append="true">
+            <PatternLayout charset="UTF-8" pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- Логгер для GlobalLogger с уровнем error -->
+        <Logger name="GlobalLogger" level="info" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Logger>
+
+        <!-- Корневой логгер -->
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" /> <!-- Добавлен File аппендер для корневого логгера -->
+        </Root>
+    </Loggers>
+</Configuration>

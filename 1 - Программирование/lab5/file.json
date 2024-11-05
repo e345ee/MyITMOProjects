@@ -1,0 +1,77 @@
+{
+  "products": [
+    {
+      "id": 336559222,
+      "name": "Продукт 3",
+      "coordinates": {
+        "x": 900.0,
+        "y": 23
+      },
+      "creationDate": "2024-09-11",
+      "price": 99,
+      "partNumber": "GPU_RADEON_666_44_81_33_44_55",
+      "manufactureCost": 56.4,
+      "manufacturer": {
+        "id": 8038065573193843167,
+        "name": "ВШЭ",
+        "employeesCount": 900
+      }
+    },
+    {
+      "id": 1935727642,
+      "name": "Продукт 2",
+      "coordinates": {
+        "x": 45.0,
+        "y": 23
+      },
+      "creationDate": "2024-09-11",
+      "price": 100,
+      "partNumber": "GIK_555_555_555_555_555_5555_5555_55",
+      "manufactureCost": 400.0,
+      "manufacturer": {
+        "id": 6441433609015348403,
+        "name": "Политех",
+        "employeesCount": 228
+      }
+    },
+    {
+      "id": 1070745318,
+      "name": "Продукт 1",
+      "coordinates": {
+        "x": 3.0,
+        "y": 67
+      },
+      "creationDate": "2024-09-11",
+      "price": 600,
+      "partNumber": "GIG_345_678_900_345_678_900",
+      "manufactureCost": 4343.0,
+      "unitOfMeasure": "METERS",
+      "manufacturer": {
+        "id": 1593852150377449189,
+        "name": "Итмо",
+        "employeesCount": 666,
+        "type": "GOVERNMENT",
+        "officialAddress": {
+          "street": "Кронверский",
+          "zipCode": "4562322"
+        }
+      }
+    },
+    {
+      "id": 1114374381,
+      "name": "4",
+      "coordinates": {
+        "x": 4.0,
+        "y": 4
+      },
+      "creationDate": "2024-09-18",
+      "price": 4,
+      "manufactureCost": 5.0,
+      "manufacturer": {
+        "id": 510492799709658778,
+        "name": "5",
+        "employeesCount": 5
+      }
+    }
+  ]
+}
