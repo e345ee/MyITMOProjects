@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторная работа №1</title>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="media/favicon.png" type="image/png">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-container">
+        <div class="profile-info">
+            <div class="profile-pic-container">
+                <img src="media/me.jpg" alt="Profile Picture" class="profile-pic" id="profilePic">
+            </div>
+            <div class="profile-name">Садовой Григорий Владимирович P3207</div>
+        </div>
+        <div class="profile-number">368748</div>
+    </div>
+</header>
+
+
+<div class="modal" id="videoModal">
+    <div class="modal-content">
+        <span class="close-button" id="closeButton">&times;</span>
+        <video controls autoplay>
+            <source src="media/boo.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
+</div>
+
+<main class="main">
+    <div class="main__left-column">
+        <div class="main__block">
+
+            <svg class="graph" id="graph" width="400" height="400" viewBox="-150 -150 300 300">
+                <line x1="-150" y1="0" x2="150" y2="0" stroke="black" stroke-width="1"/>
+                <line x1="0" y1="-150" x2="0" y2="150" stroke="black" stroke-width="1"/>
+
+                <!-- Arrows on Axes -->
+                <line x1="150" y1="0" x2="140" y2="10" stroke="black" stroke-width="1"/>
+                <line x1="150" y1="0" x2="140" y2="-10" stroke="black" stroke-width="1"/>
+                <line x1="0" y1="-150" x2="-10" y2="-140" stroke="black" stroke-width="1"/>
+                <line x1="0" y1="-150" x2="10" y2="-140" stroke="black" stroke-width="1"/>
+
+                <!-- Shaded Area with Rainbow Animation -->
+                <rect x="0" y="0" width="100" height="50" class="rainbow-fill"/>
+                <polygon points="0,0 50,0 0,-50" class="rainbow-fill"/>
+                <path d="M -50 0 A 50 50 0 0 1 0 -50" class="rainbow-fill"/>
+                <polygon points="0,0 -50,0 0,-50" class="rainbow-fill"/>
+
+                <!-- Labels for X and Y Axes -->
+                <text x="155" y="5" font-size="12" fill="black">X</text>
+                <text x="5" y="-155" font-size="12" fill="black">Y</text>
+
+                <!-- Значки на координатной плоскости -->
+                <line x1="50" y1="-5" x2="50" y2="5" stroke="black" stroke-width="1"/>
+                <text x="45" y="20" font-size="12" fill="black">R/2</text>
+                <line x1="100" y1="-5" x2="100" y2="5" stroke="black" stroke-width="1"/>
+                <text x="95" y="20" font-size="12" fill="black">R</text>
+                <line x1="-50" y1="-5" x2="-50" y2="5" stroke="black" stroke-width="1"/>
+                <text x="-55" y="20" font-size="12" fill="black">-R/2</text>
+                <line x1="-100" y1="-5" x2="-100" y2="5" stroke="black" stroke-width="1"/>
+                <text x="-105" y="20" font-size="12" fill="black">-R</text>
+                <line x1="-5" y1="50" x2="5" y2="50" stroke="black" stroke-width="1"/>
+                <text x="10" y="55" font-size="12" fill="black">R/2</text>
+                <line x1="-5" y1="100" x2="5" y2="100" stroke="black" stroke-width="1"/>
+                <text x="10" y="105" font-size="12" fill="black">R</text>
+                <line x1="-5" y1="-50" x2="5" y2="-50" stroke="black" stroke-width="1"/>
+                <text x="10" y="-45" font-size="12" fill="black">-R/2</text>
+                <line x1="-5" y1="-100" x2="5" y2="-100" stroke="black" stroke-width="1"/>
+                <text x="10" y="-95" font-size="12" fill="black">-R</text>
+            </svg>
+        </div>
+        <div class="main__block">
+            <div class="row">
+                <span class="parameters-title">Параметры</span>
+            </div>
+            <div class="row">
+                <div class="content">
+                    <div class="label">Выберите X:</div>
+                    <div class="input-group">
+                        <div><input name="x-value" type="radio" value="-4">-4</div>
+                        <div><input name="x-value" type="radio" value="-3">-3</div>
+                        <div><input name="x-value" type="radio" value="-2">-2</div>
+                        <div><input name="x-value" type="radio" value="-1">-1</div>
+                        <div><input name="x-value" type="radio" value="0">0</div>
+                        <div><input name="x-value" type="radio" value="1">1</div>
+                        <div><input name="x-value" type="radio" value="2">2</div>
+                        <div><input name="x-value" type="radio" value="3">3</div>
+                        <div><input name="x-value" type="radio" value="4">4</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="content">
+                    <div class="label">Выберите Y:</div>
+                    <div class="input-group">
+                        <input name="y-value" id="y-input" type="text" placeholder="значение от -5 до 5" maxlength="7">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="content">
+                    <div class="label">Выберите R:</div>
+                    <div class="input-group">
+                        <button class="r-button" data-value="1">1.0</button>
+                        <button class="r-button" data-value="1.5">1.5</button>
+                        <button class="r-button" data-value="2">2.0</button>
+                        <button class="r-button" data-value="2.5">2.5</button>
+                        <button class="r-button" data-value="3">3.0</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Скрытое поле для хранения выбранного значения R -->
+            <input type="hidden" name="r-value" id="r-value">
+            <div class="row button-row">
+                <button class="submit_button" id="submit">Проверить</button>
+            </div>
+        </div>
+    </div>
+    <div class="main__right-column">
+        <div class="result-container">
+            <div class="result-title">Результат</div>
+
+
+            <div class="result-header">
+                <div>Время отправки</div>
+                <div>X</div>
+                <div>Y</div>
+                <div>R</div>
+                <div>Попадание</div>
+                <div>Время выполнения</div>
+            </div>
+
+
+            <div class="result-body" id="result">
+
+            </div>
+        </div>
+    </div>
+    <div class="notification-container" id="notificationContainer"></div>
+</main>
+
+<script>
+    function showNotification(message, type = 'error') {
+    const notificationContainer = document.getElementById("notificationContainer");
+
+    const notification = document.createElement("div");
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+
+    // Добавляем плашку в контейнер и анимируем её появление
+    notificationContainer.appendChild(notification);
+    setTimeout(() => notification.style.opacity = 1, 10);
+
+    // Удаляем плашку через 3 секунды
+    setTimeout(() => {
+        notification.style.opacity = 0;
+        setTimeout(() => notificationContainer.removeChild(notification), 500);
+    }, 3000);
+}
+</script>
+<script>
+    const profilePic = document.getElementById("profilePic");
+    const videoModal = document.getElementById("videoModal");
+    const closeButton = document.getElementById("closeButton");
+    const videoElement = videoModal.querySelector("video");
+
+    // Открытие модального окна с видео при клике на изображение
+    profilePic.addEventListener("click", function () {
+        videoModal.style.display = "flex"; // Показываем модальное окно
+        videoElement.play(); // Начинаем воспроизведение видео
+        console.log("Видео открылось");
+    });
+
+    // Закрытие модального окна при клике на кнопку закрытия
+    closeButton.addEventListener("click", function () {
+        videoModal.style.display = "none";
+        videoElement.pause(); // Останавливаем видео
+        videoElement.currentTime = 0; // Перематываем видео к началу
+        console.log("Кнопка закрытия сработала");
+    });
+
+    // Автоматическое закрытие модального окна по завершению видео
+    videoElement.addEventListener("ended", function () {
+        videoModal.style.display = "none";
+        videoElement.currentTime = 0; // Перематываем видео к началу
+        console.log("Видео закончилось и окно закрылось");
+    });
+</script>
+<script>
+    // Получаем все кнопки R и добавляем к ним обработчик клика
+    document.querySelectorAll('.r-button').forEach(button => {
+        button.addEventListener('click', () => {
+            // Удаляем класс 'selected' у всех кнопок
+            document.querySelectorAll('.r-button').forEach(btn => btn.classList.remove('selected'));
+
+            // Добавляем класс 'selected' к нажатой кнопке
+            button.classList.add('selected');
+
+            // Сохраняем выбранное значение R
+            const selectedR = button.getAttribute('data-value');
+            document.getElementById('r-value').value = selectedR; // Обновляем скрытое поле
+            console.log("Выбранное значение R:", selectedR); // Для проверки, можно удалить
+        });
+    });
+</script>
+<script>
+    $(".r-button").on("click", function () {
+        $(".r-button").removeClass("selected"); // Снимаем выделение с других кнопок
+        $(this).addClass("selected"); // Добавляем выделение к нажатой кнопке
+        $("#r-value").val($(this).data("value")); // Сохраняем значение R в скрытое поле
+    });
+
+    let lastPoint = null;
+
+    function drawNewPoint(x, y, r, result) {
+        const svg = document.getElementById("graph");
+
+        // Удаляем последнюю точку, если она существует
+        if (lastPoint) {
+            svg.removeChild(lastPoint);
+        }
+
+        // Преобразование координат X и Y из реальных значений в координаты SVG
+        const svgX = (x / r) * 150 * (2 / 3);
+        const svgY = -(y / r) * 150 * (2 / 3); // инвертируем ось Y
+
+        // Создание элемента <circle> для новой точки
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", svgX);
+        circle.setAttribute("cy", svgY);
+        circle.setAttribute("r", 4);
+        circle.setAttribute("fill", result ? "green" : "red");
+
+        // Добавляем новую точку в SVG и сохраняем её ссылку в lastPoint
+        svg.appendChild(circle);
+        lastPoint = circle; // Сохраняем ссылку на последнюю точку
+    }
+
+    function addRowToTable(x, y, r, result, execTime, currentTime) {
+        const newRow = $("<div></div>").addClass("result-row");
+
+        // Стиль строки в зависимости от результата
+        if (result) {
+            newRow.addClass("result-success");
+        } else {
+            newRow.addClass("result-failure");
+        }
+
+        // Добавляем данные в строки
+        newRow.append($("<div></div>").text(currentTime.split(" ")[1]));
+        newRow.append($("<div></div>").text(x));
+        newRow.append($("<div></div>").text(y));
+        newRow.append($("<div></div>").text(r));
+        newRow.append($("<div></div>").text(result ? "Да" : "Нет"));
+        newRow.append($("<div></div>").text(execTime + " s"));
+
+        $("#result").prepend(newRow); // Добавляем новую строку в начало таблицы
+    }
+
+    $("#submit").on("click", function () {
+        let xValue = Number($("input[name='x-value']:checked").val());
+        let yValue = Number($("input[name='y-value']").val());
+        let rValue = Number($("#r-value").val());
+
+        if (isNaN(xValue)) {
+            showNotification("Некорректное значение для X. Пожалуйста, выберите значение.");
+            return;
+        }
+
+        if (isNaN(yValue) || yValue < -5 || yValue > 5) {
+            showNotification("Некорректное значение для Y. Введите значение от -5 до 5.");
+            return;
+        }
+
+        if (isNaN(rValue)) {
+            showNotification("Некорректное значение для R. Пожалуйста, выберите значение.");
+            return;
+        }
+
+        console.log("Отправка запроса на сервер...");
+
+        $.ajax({
+            url: "/fcgi-bin/?" + $.param({ x: xValue, y: yValue, r: rValue }),
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                console.log("Успешный ответ от сервера");
+                console.log(response);
+
+                if (response.error != null) {
+                    showNotification("Ответ от сервера не получен");
+                    console.log(response);
+                } else {
+                    // Рисуем новую точку на графике
+                    drawNewPoint(xValue, yValue, rValue, response.result);
+
+                    // Добавляем данные в таблицу
+                    addRowToTable(xValue, yValue, rValue, response.result, response.exec_time, response.current_time);
+                }
+            },
+            error: function (xhr, status, error) {
+                showNotification("Ошибка при соединении с сервером");
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

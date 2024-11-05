@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Comic Sans MS";
+}
+
+.main {
+    display: flex;
+    align-items: stretch;
+    width: 100vw;
+    height: calc(100vh - 12%);
+    padding: 2%;
+    gap: 0;
+    font-family: fantasy;
+}
+
+.main__left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 33.33%;
+
+
+
+}
+
+#submit {
+    font-family: "Comic Sans MS";
+}
+
+.main__right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 66.67%;
+    padding: 2%;
+    margin: 0;
+}
+
+.header {
+    font-size: 1em;
+    color: #fff;
+    background-color: #271ac7;
+    padding: 1% 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-pic-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.profile-pic:hover {
+    transform: scale(1.1);
+}
+
+.profile-name {
+    font-size: 1em;
+    color: #fff;
+}
+
+.profile-number {
+    font-size: 1em;
+    color: #fff;
+    margin-left: auto;
+    text-align: right;
+}
+
+.graph-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+}
+
+.graph {
+    background-color: #f4f4f9;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Блок "Параметры" */
+.main__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+    border: 1px solid #000;
+    margin-top: 2%;
+    width: 100%;
+}
+
+/* Заголовок "Параметры" */
+.parameters-title {
+    font-size: 1.2em;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+/* Строки внутри блока */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0.5% 0;
+    flex-wrap: nowrap;
+
+}
+
+/* Контейнер для содержимого внутри строки */
+.content {
+    display: flex;
+    align-items: center;
+}
+
+/* Надписи */
+.label {
+    width: 40%; /* Используем проценты для выравнивания */
+    flex-wrap: nowrap;
+
+}
+
+/* Группа элементов ввода */
+.input-group {
+    display: flex;
+
+    gap: 1%;
+    flex-wrap: nowrap;
+}
+
+/* Стили для кнопки отправки */
+.submit_button {
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    font-family: fantasy;
+    transition: background-color 0.2s ease;
+    font-family: fantasy !important;
+}
+
+.submit_button:hover {
+    background-color: #b3e7ab;
+}
+
+.submit_button:active {
+    background-color: #a0d042;
+}
+
+button[data-value="1"] {
+    background-color: #e0f7fa;
+}
+
+/* Стили для кнопок R */
+.r-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    margin: 0.2em;
+    transition: background-color 0.3s ease;
+    font-family: fantasy;
+}
+
+.r-button.selected {
+    background-color: #a0d042;
+    color: white;
+}
+
+.r-button:hover {
+    background-color: #e0e0e0;
+    font-family: Arial;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.close-button {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.result-container {
+    width: 100%;
+}
+
+.result-title {
+    text-align: center;
+    margin: 1% 0;
+}
+
+/* Заголовки таблицы */
+.result-header {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+    border-bottom: 2px solid #000;
+    padding: 1% 0;
+}
+
+/* Стили для строк данных */
+.result-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 60vh;
+    overflow-y: auto;
+    border-top: 1px solid #000;
+
+}
+
+.result-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+
+    padding: 1% 0;
+}
+
+
+.result-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.result-failure {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+.result-row > div, .result-header > div {
+    border-right: 1px solid #000;
+    padding: 1%;
+}
+
+.result-row > div:first-child, .result-header > div:first-child {
+    border-left: 1px solid #000;
+}
+
+.result-row > div:last-child, .result-header > div:last-child {
+    border-right: none;
+}
+
+/* Анимация для радужного переливания */
+@keyframes rainbow {
+    0% { fill: red; }
+    8% { fill: orange; }
+    16% { fill: yellow; }
+    24% { fill: lime; }
+    32% { fill: green; }
+    40% { fill: cyan; }
+    48% { fill: skyblue; }
+    56% { fill: blue; }
+    64% { fill: indigo; }
+    72% { fill: violet; }
+    80% { fill: pink; }
+    88% { fill: lightcoral; }
+    96% { fill: tomato; }
+    100% { fill: red; }
+}
+
+
+.rainbow-fill {
+    animation: rainbow 10s infinite linear;
+    opacity: 0.7;
+}
+
+.notification-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    z-index: 1000;
+}
+
+.notification {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
