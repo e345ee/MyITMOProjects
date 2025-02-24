@@ -31,7 +31,7 @@ public class PostgresSQLManager implements DatabaseManager {
         }
         return DriverManager.getConnection("jdbc:postgresql://pg:5432/studs", info);
     }
-
+//TtSXRLK86yz5ENVZ
     @Override
     public ArrayList<Product> getCollectionFromDatabase() {
         ArrayList<Product> data = new ArrayList<>();

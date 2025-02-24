@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <meta charset="UTF-8"/>
+    <title>Лабораторная работа №3</title>
+    <script defer="defer" src="#{resource['js/main.js']}"></script>
+    <link rel="stylesheet" href="#{resource['css/main.css']}"/>
+    <link rel="icon" type="image/jpg" href="#{resource['media/иконка.jpg']}"/>
+</h:head>
+
+<body>
+<div class="content-container">
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <img src="#{resource['media/photo.jpg']}" alt="Фото" class="profile-photo"/>
+                <div>Садовой Григорий Владимирович P3207</div>
+            </div>
+            <h:link value="Вернуться" outcome="index" styleClass="link-to-index"/>
+        </div>
+    </header>
+    <div id="notification-box"></div>
+
+
+    <h:form method="get" id="form">
+        <main class="main">
+            <div class="main__left-column">
+                <div class="main__block" id="graph-container">
+                    <ui:include src="../resources/media/graph.svg" />
+                </div>
+                <div class="main__block">
+                    <div class="row">Параметры</div>
+                    <div class="row">
+                        <div>Выберите X:</div>
+                        <p:selectOneRadio id="x" value="#{formBean.x}">
+                            <f:selectItem itemLabel="-3" itemValue="-3" />
+                            <f:selectItem itemLabel="-2" itemValue="-2" />
+                            <f:selectItem itemLabel="-1" itemValue="-1" />
+                            <f:selectItem itemLabel="0" itemValue="0" />
+                            <f:selectItem itemLabel="1" itemValue="1" />
+                            <f:selectItem itemLabel="2" itemValue="2" />
+                            <f:selectItem itemLabel="3" itemValue="3" />
+                        </p:selectOneRadio>
+                    </div>
+                    <div class="row">
+                        <div>Выберете Y:</div>
+                        <p:inputText id="y" value="#{formBean.y}" required="true" styleClass="input" maxlength="5" placeholder="от -5 до 3"/>
+                        <p:message for="y" />
+                    </div>
+                    <div class="row" style="display: flex; gap: 5px;">
+                        <div style="padding-top: 3px">Выберите R:</div>
+                        <h:panelGroup id="r-buttons">
+                            <p:commandButton value="1" action="#{formBean.setR(1)}" styleClass="r-button"
+                                             update=":form:hiddenR :form:r-buttons" oncomplete="redrawDots()" />
+                            <p:commandButton value="1.5" action="#{formBean.setR(1.5)}" styleClass="r-button"
+                                             update=":form:hiddenR :form:r-buttons" oncomplete="redrawDots()" />
+                            <p:commandButton value="2" action="#{formBean.setR(2)}" styleClass="r-button"
+                                             update=":form:hiddenR :form:r-buttons" oncomplete="redrawDots()" />
+                            <p:commandButton value="2.5" action="#{formBean.setR(2.5)}" styleClass="r-button"
+                                             update=":form:hiddenR :form:r-buttons" oncomplete="redrawDots()" />
+                            <p:commandButton value="3" action="#{formBean.setR(3)}" styleClass="r-button"
+                                             update=":form:hiddenR :form:r-buttons" oncomplete="redrawDots()" />
+                        </h:panelGroup>
+
+                    </div>
+
+
+                    <h:inputHidden id="hiddenR" value="#{formBean.r}" />
+
+
+                </div>
+                <h:commandButton value="Проверить" onclick="return validateForm()"
+                                 styleClass="main__block submit_button" immediate="true">
+                    <f:ajax render="@form, :form:table" execute="@form" listener="#{formBean.check()}" onevent="redrawDots" />
+                </h:commandButton>
+
+                <h:commandButton value="Очистить" action="#{tableBean.clearAllPoints()}"
+                                 styleClass="clear-button" immediate="true">
+                    <f:ajax execute="@this" render="table graph-container"/>
+                </h:commandButton>
+
+            </div>
+            <div>
+                <div class="result-title">Результат</div>
+                <p:dataTable value="#{tableBean.points}" var="point" id="table"
+                             scrollable="true" scrollHeight="600">
+                    <p:column headerText="X" style="text-align: center;">
+                        <h:outputText value="#{point.x}" />
+                    </p:column>
+                    <p:column headerText="Y" style="text-align: center;">
+                        <h:outputText value="#{point.y}" />
+                    </p:column>
+                    <p:column headerText="R" style="text-align: center;">
+                        <h:outputText value="#{point.r}" />
+                    </p:column>
+                    <p:column headerText="Попал?" style="text-align: center;">
+                        <h:outputText value="#{point.result ? 'Да' : 'Нет'}"
+                                      style="color: #{point.result ? 'green' : 'red'}" />
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </main>
+    </h:form>
+    <h:form id="checkForm">
+        <h:inputHidden id="hiddenX" value="#{formBean.x}" />
+        <h:inputHidden id="hiddenY" value="#{formBean.y}" />
+        <h:inputHidden id="hiddenR" value="#{formBean.r}" />
+
+        <h:commandButton id="checkButton" action="#{formBean.check()}" style="display:none">
+            <f:ajax render="@form, :form:table" execute="@form" onevent="redrawDots" />
+        </h:commandButton>
+    </h:form>
+</div>
+</body>
+</html>

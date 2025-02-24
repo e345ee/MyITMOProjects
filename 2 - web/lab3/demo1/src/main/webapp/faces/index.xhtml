@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Лабораторная работа №3</title>
+    <script src="#{resource['js/index.js']}"></script>
+    <link rel="stylesheet" href="#{resource['css/index.css']}"/>
+    <link rel="icon" type="image/jpg" href="#{resource['media/иконка.jpg']}"/>
+</head>
+
+<body>
+<header class="header">
+    <div class="header-container">
+        <div style="display: flex; align-items: center;">
+            <img src="#{resource['media/photo.jpg']}" alt="Фото" class="profile-photo"/>
+            <div>Садовой Григорий Владимирович P3207</div>
+        </div>
+        <div class="variant">Вариант 430448</div>
+    </div>
+</header>
+<main id="main-content">
+    <div class="clock-container">
+        <div id="time"></div>
+    </div>
+
+    <div class="center-container">
+        <img src="#{resource['media/2.jpg']}" alt="Прицел" class="side-image"/>
+        <h:link styleClass="link-to-main-page" value="Проверь попадание точки!!!!" outcome="main" onclick="showLoadingScreen(event)"/>
+        <img src="#{resource['media/2.jpg']}" alt="Прицел" class="side-image"/>
+    </div>
+
+    <div class="gif-container">
+        <img src="#{resource['media/веб3_хомяк.gif']}" alt="Хомячок" class="gif-animation"/>
+    </div>
+</main>
+
+
+<div id="loading-screen" class="loading-container">
+    <img src="#{resource['media/loading.gif']}" alt="Загрузка" class="loading-gif"/>
+    <p class="loading-text">Немного подождите...</p>
+</div>
+
+
+
+
+
+
+</body>
+
+</html>
