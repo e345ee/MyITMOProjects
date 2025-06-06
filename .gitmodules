@@ -1,3 +1,9 @@
 [submodule "2 - OPI/lab2"]
 	path = 2 - OPI/lab2
 	url = git@github.com:Umchik1222/repo-branching-simulation.git
+[submodule "2 - OPI/lab3-4"]
+	path = 2 - OPI/lab3-4
+	url = git@github.com:Umchik1222/java-ant-webapp.git
+[submodule "2 - CompMath/all_labs"]
+	path = 2 - CompMath/all_labs
+	url = git@github.com:Umchik1222/Computational_Mathematics.git
