@@ -4,3 +4,9 @@
 [submodule "2 - CompMath/all_labs"]
 	path = 2 - CompMath/all_labs
 	url = git@github.com:Umchik1222/Computational_Mathematics.git
+[submodule "2 - OPI/lab3-lab4/lab3-lab4"]
+	path = 2 - OPI/lab3-lab4/lab3-lab4
+	url = https://github.com/Umchik1222/jsf-webapp-pointcatcher.git
+[submodule "2 - web/lab3"]
+	path = 2 - web/lab3
+	url = https://github.com/Umchik1222/jsf-webapp-pointcatcher.git
