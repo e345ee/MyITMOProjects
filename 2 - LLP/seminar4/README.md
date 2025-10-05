@@ -14,5 +14,5 @@
 
 ---
 
-<img alt="Function" src="https://github.com/Umchik1222/MyITMOProjects/blob/main/2%20-%20LLP/seminar4/media/image.png" height="350">
+<img alt="Function" src="https://github.com/e345ee/MyITMOProjects/blob/main/2%20-%20LLP/seminar4/media/image.png" height="350">
 Функция, значение которой мы вычисляем.
