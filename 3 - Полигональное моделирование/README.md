@@ -3,21 +3,19 @@
 Данный проект выполнен в рамках дисциплины  
 «Полигональное моделирование».
 
-https://drive.google.com/file/d/1b--E-91rLkcuaTpz3twA8b0w254AoTbJ/view?usp=sharing
-
 Проект представляет собой 3D-модель интерьера комнаты,
 разработанную и оптимизированную для дальнейшего импорта
 в игровой движок.
 
 ## Скачать
 
-![Ссылка на скачивание](https://drive.google.com/file/d/1b--E-91rLkcuaTpz3twA8b0w254AoTbJ/view?usp=sharing)
+[Ссылка на скачивание](https://drive.google.com/file/d/1b--E-91rkcuaTpz3twA8b0w254AoTbJ/view?usp=sharing)
 
 ---
 
 ## Превью
 
-![Финальный рендер](Рендеры/рендер1.jpg)
+![Финальный рендер](Проект/Рендеры/рендер1.jpg)
 
 ---
 
