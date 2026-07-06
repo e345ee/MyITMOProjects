@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'itmo.web.dead_web'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+war {
+    archiveFileName = 'server.war'
+}

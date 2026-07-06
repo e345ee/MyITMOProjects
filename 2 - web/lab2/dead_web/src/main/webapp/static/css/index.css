@@ -1,0 +1,213 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+* {
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: bold;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+input[type="radio"] {
+    cursor: pointer;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+/* Заголовок */
+.header {
+    font-size: 16px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: #271ac7;
+    border-radius: 8px; /* Скругление углов */
+}
+
+.header-container {
+    display: grid;
+    grid-template-columns: minmax(max-content, 2fr) 6fr minmax(max-content, 1fr);
+    line-height: 55px;
+    height: 55px;
+    width: calc(100% - 40px);
+    margin: auto;
+}
+
+/* Основной блок */
+.main {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    height: calc(100vh - 55px);
+    width: 100vw;
+}
+
+.main > div {
+    border: 1px solid rgba(80, 72, 72, 0.92);
+    border-radius: 10px; /* Скругление углов */
+}
+
+.main__left-column {
+    display: grid;
+    grid-template-rows: max-content max-content auto;
+}
+
+.main__block {
+    margin: 15px 15px 0 15px;
+    border: 1px solid rgba(80, 72, 72, 0.92);
+    border-radius: 10px; /* Скругление углов */
+    padding: 10px; /* Добавлен внутренний отступ */
+}
+
+.main__block .row {
+    margin: 13px auto;
+    width: fit-content;
+}
+
+.main__block .row > * {
+    display: inline-block;
+}
+
+/* График */
+.graph {
+    display: block;
+    height: 370px;
+    width: 370px;
+    margin: 20px auto;
+    border: 1px solid rgba(80, 72, 72, 0.92);
+    border-radius: 10px; /* Скругление углов */
+}
+
+/* Поля ввода */
+#x-input, #y-input {
+    height: 18px;
+    width: 326px;
+    text-indent: 3px;
+    border-radius: 5px; /* Скругление углов */
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Кнопка отправки */
+.submit_button {
+    background-color: #78a2ce;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px; /* Скругление углов */
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.submit_button:hover {
+    background-color: #887cd5;
+}
+
+.submit_button:active {
+    background-color: #4b5fc5;
+}
+
+/* Результат */
+.result-title {
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.result-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.result-container > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 5px;
+    box-shadow: 1px 1px rgba(80, 72, 72, 0.92);
+    border-radius: 5px;
+}
+
+.result-header > div, .result-container > div > div {
+    flex: 1 1 0;
+    min-width: 50px;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.result-header {
+    font-weight: bold;
+}
+
+/* Ссылки */
+.link-to-form {
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-to-form, .link-to-form:visited, .link-to-form:hover, .link-to-form:active {
+    color: inherit;
+}
+
+
+.circle {
+    position: relative;
+    border-radius: 50%;
+}
+
+#result-image-container {
+    margin-top: 20px;
+}
+
+#result-image-container img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+
+.notification {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    pointer-events: auto;
+}
+
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
