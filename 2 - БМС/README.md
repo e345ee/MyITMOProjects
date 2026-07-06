@@ -1,18 +1,18 @@
-# БМС
+# BMS
 
-![БМС](media/bms.gif)
+![BMS](media/bms.gif)
 
-Материалы по дисциплине «БМС» за 2 курс.
+Materials for the second-year BMS course.
 
-## Работы
+## Works
 
-- `ДЗ1.pdf` и `ДЗ2.pdf` - домашние работы с расчетами и оформленными
-  результатами.
-- `Яндекс не может - Посейдон поможет.pptx` - презентация идеи водного такси
-  в Санкт-Петербурге: позиционирование сервиса, отличие от обычного такси и
-  аргументация через городскую инфраструктуру каналов и разводных мостов.
+- Homework PDFs - assignments with calculations and
+  formatted results.
+- Water taxi presentation - presentation of a water taxi idea
+  for Saint Petersburg: service positioning, differences from regular taxis,
+  and argumentation based on the city's canal and drawbridge infrastructure.
 
-## Стек
+## Stack
 
 ![Business Modeling](https://img.shields.io/badge/Business_Modeling-0F172A?style=for-the-badge)
 ![Startup](https://img.shields.io/badge/Startup-2563EB?style=for-the-badge)

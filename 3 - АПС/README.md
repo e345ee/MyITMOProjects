@@ -1,17 +1,16 @@
-# Архитектура программных систем
+# Software Systems Architecture
 
-![Архитектура программных систем](media/aps.jpg)
+![Software Systems Architecture](media/aps.jpg)
 
-Материалы по дисциплине «Архитектура программных систем» за 3 курс.
+Materials for the third-year Software Systems Architecture course.
 
-## Лабораторные
+## Labs
 
-- `АПС1.pdf` - лабораторная работа №1 по проектированию и описанию
-  архитектуры программной системы.
-- `АПС2.pdf` - лабораторная работа №2 «Использование шаблонов
-  проектирования».
+- Lab 1 PDF - lab work 1 on designing and describing software system
+  architecture.
+- Lab 2 PDF - lab work 2, "Using Design Patterns".
 
-## Стек
+## Stack
 
 ![Software Architecture](https://img.shields.io/badge/Software_Architecture-0F172A?style=for-the-badge)
 ![Design Patterns](https://img.shields.io/badge/Design_Patterns-2563EB?style=for-the-badge)

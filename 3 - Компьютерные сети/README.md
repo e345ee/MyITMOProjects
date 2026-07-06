@@ -1,14 +1,14 @@
-# Компьютерные сети
+# Computer Networks
 
-Материалы по дисциплине «Компьютерные сети» за 3 курс.
+Materials for the third-year Computer Networks course.
 
-## Ссылки
+## Links
 
-- [Лабораторные работы](https://github.com/e345ee/net-slave)
+- [Lab Work](https://github.com/e345ee/net-slave)
 
-  Репозиторий с лабораторными по моделированию и анализу сетей: топологии
-  NetEmul, отчёты по локальным сетям, маршрутизации, DHCP/RIP и анализу
-  реального трафика в Wireshark.
+  Repository with labs on network modeling and analysis: NetEmul topologies,
+  reports on local networks, routing, DHCP/RIP, and analysis of real traffic in
+  Wireshark.
 
   ![NetEmul](https://img.shields.io/badge/NetEmul-2B6CB0?style=for-the-badge)
   ![Wireshark](https://img.shields.io/badge/Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white)
@@ -21,11 +21,12 @@
   ![RIP](https://img.shields.io/badge/RIP-DC2626?style=for-the-badge)
   ![Typst](https://img.shields.io/badge/Typst-239DAD?style=for-the-badge&logo=typst&logoColor=white)
 
-- [Курсовой / проектный стенд](https://github.com/e345ee/distributed-compute-gateway)
+- [Course / Project Stand](https://github.com/e345ee/distributed-compute-gateway)
 
-  Прототип распределённой вычислительной системы: gateway принимает задачи,
-  выбирает worker, запускает job-контейнер и проксирует TCP-трафик до
-  вычислителя. Внутри также есть frontend, load-тесты, отчёт и мониторинг.
+  Prototype of a distributed computing system: the gateway accepts tasks,
+  selects a worker, starts a job container, and proxies TCP traffic to the
+  compute node. The repository also includes a frontend, load tests, a report,
+  and monitoring.
 
   ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
   ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
@@ -38,9 +39,9 @@
   ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
   ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
 
-## Кратко по лабораторным
+## Lab Summary
 
-- ЛР1 - базовые сети в NetEmul: два и три компьютера, ARP, UDP, таблицы маршрутизации.
-- ЛР2 - локальные сети с hub/switch, таблицы коммутации и сравнение сегментов.
-- ЛР3 - сети с маршрутизаторами, статическая маршрутизация, RIP, DHCP, UDP/TCP.
-- ЛР4 - анализ трафика через Wireshark: ping, фрагментация IP, TTL, traceroute, ARP, DNS/nslookup.
+- Lab 1 - basic networks in NetEmul: two and three computers, ARP, UDP, and routing tables.
+- Lab 2 - local networks with hub/switch, switching tables, and segment comparison.
+- Lab 3 - networks with routers, static routing, RIP, DHCP, UDP/TCP.
+- Lab 4 - traffic analysis with Wireshark: ping, IP fragmentation, TTL, traceroute, ARP, DNS/nslookup.

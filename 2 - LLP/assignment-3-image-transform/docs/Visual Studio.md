@@ -1,27 +1,24 @@
-# Разработка с Visual Studio
+# Development with Visual Studio
 
-## 1. Выберите и склонируйте ваш форк с GitLab
+## 1. Select and clone your GitLab fork
 
-![Select project from VCS](VS/01-vcs.png)
+Clone your fork of the assignment repository and open it in Visual Studio.
 
-## 2. В окне решения, выберите `Folder View` на панели слева
+## 2. In the solution window, select `Folder View` in the left panel
 
-![Select Folder View](VS/02-folder-view.png)
+Visual Studio will run the CMake project configuration with the default profile
+(**`x64-Debug`**).
 
-Visual Studio запустит конфигурацию проекта с помощью CMake в профиле по умолчанию (**`x64-Debug`**).
+## 3. Select the required configuration from the dropdown
 
-## 3. Выберите необходимую конфигурацию в раскрывающемся списке
+- **`x64-Debug`** builds quickly and is suitable for development.
+- **`x64-Asan`** is useful for debugging segmentation faults and other memory
+  problems. It is recommended to run your code with ASan before submitting it
+  for review.
+- **`x64-Release`** is used to build optimized code and check performance.
 
-![Choose Config](VS/03-choose-config.png)
+## 4. Use the top panels to build and test
 
-- **`x64-Debug`** быстро компилируется и подходит для разработки.
-- **`x64-Asan`** подходит для отладки ошибок сегментации и других проблем с памятью. Рекомендуется 
-  запустить ваш код в Asan перед отправкой на проверку!
-- **`x64-Release`** нужен для сборки кода с оптимизациями и проверки скорости выполнения.
-
-## 4. Используйте панели сверху для запуска сборки и тестирования
-
-![Run build and tests](VS/04-tests.png)
-
-- Варианты для сборки находятся в меню **`Build`**. Для сборки всего решения нажмите **`F7`**.
-- Для запуска тестов выберите **`Run CTests for ...`** в меню **`Test`**.
+- Build options are located in the **`Build`** menu. Press **`F7`** to build the
+  whole solution.
+- To run tests, select **`Run CTests for ...`** in the **`Test`** menu.

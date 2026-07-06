@@ -1,55 +1,69 @@
-# Assignment 1: Input/Output library in assembly
----
-Лабораторная работа 1: библиотека ввода-вывода на Assembler
+# I/O Library
 
+Lab work 1: an input/output library in Assembly.
 
-Реализуйте библиотеку процедур, которые будут выполнять простые действия со строками, числами и их текстовыми представлениями.
+Implement a library of procedures that perform simple operations on strings,
+numbers, and their textual representations.
 
-# Подготовка
+# Preparation
 
-* Прочитайте первые две главы "Low-level programming: C, assembly and program execution".
+* Read the first two chapters of "Low-level programming: C, assembly and
+  program execution".
 
-* Ознакомьтесь с [документацией на следующие инструкции](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2024/main/-/blob/master/docs/intel-manual.pdf) и [Документацией по Linux ABI](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2024/main/-/blob/master/docs/x86_64-abi-0.99.pdf).
+* Study the documentation for the following instructions and the Linux ABI
+  documentation:
 
-  - `xor`
-  - `jmp`, `ja` и другими командами условного перехода
+  - `jmp`, `ja`, and other conditional jump instructions
   - `cmp`
-  - `mov`
-  - `inc`, `dec`
-  - `add`, `imul`, `mul`, `sub`, `idiv`, `div`
-  - `neg`
-  - `call`, `ret`
-  - `push`, `pop`
-  
-  Документация &mdash; огромный документ. В просмотрщике PDF файлов найдите панель с оглавлением документа; там ищите второй том "Instruction Set Reference", где для каждой инструкции есть отдельная страничка.
+  - `test`
+  - `xor`
+  - `push` and `pop`
+  - `call` and `ret`
+  - `add`, `sub`, `mul`, `div`, `inc`, `dec`
+  - `syscall`
+  - `mov`, `lea`
 
-![](./img/outline.png) 
+  The documentation is huge. In a PDF viewer, find the document table of
+  contents and look for volume two, "Instruction Set Reference", where each
+  instruction has its own page.
 
+* Read the documentation for the `read` system call with `man`. Its syscall
+  number, placed in `rax`, is `0`. Information about the registers used to pass
+  syscall parameters can be found in the syscall table from the course
+  materials.
 
-* Прочитайте документацию на системный вызов `read` с помощью `man`. Его номер (который кладётся в `rax`) 0. Информацию о регистрах, используемых для передачи параметров в системные вызовы можно найти в [таблице](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2024/main/-/blob/main/docs/system-calls.md).
+# Implementation
 
-# Написание
+- Fill `lib.asm` with code instead of function stubs. Reuse already implemented
+  functions where possible.
+- Use `test.py` to test the implementation.
 
-- Впишите в `lib.asm` код вместо заглушек функций. По возможности переиспользуйте уже реализованные функции.
-- Используйте `test.py` чтобы протестировать работу. 
+The `test.py` script generates a set of executable tests for each function, so
+you can debug them individually. See also Appendix A in "Low-level programming:
+C, assembly and program execution". During test execution, the code is checked
+for calling convention compliance and 16-byte stack alignment before every
+`call`.
 
-Скрипт `test.py` будет генерировать набор исполняемых файлов с тестами для каждой функции, вы можете отладить их по-отделенности; также см. Appendix A в "Low-level programming: C, assembly and program execution". При выполнении тестов проверяется соответствие кода соглашениям о вызовах и выравнивание стека кратно 16 перед всеми вызовами `call`.
- 
-# Список распространённых ошибок
+# Common Mistakes
 
-- Для строки размером `n` байт необходимы `n+1` байт из-за нуль-терминатора.
-- Метки функций должны быть глобальными, остальные &mdash; локальными.
-- Регистры не хранят ноль "по умолчанию".
-- Если вы используете callee-saved регистры, вы должны сохранить их значения.
-- Если вы используете caller-saved регистры, вы должны сохранить их значения перед `call` и затем восстанавливать.
-- Не используйте буферы в секции `.data`. Вместо этого аллоцируйте место в стеке, уменьшая значение `rsp`.
-- Функции принимают аргументы в `rdi`, `rsi`, `rdx`, `rcx`, `r8` и `r9`.
-- Не выводите числа символ за символом. Сформируйте строку в памяти и вызовите `print_string`.
-- Проверьте, что `parse_int` и `parse_uint` корректно устанавливают `rdx` (очень важно для следующего задания)
-- Проверьте, что функции `parse_int`, `parse_uint` и `read_word` правильно работают когда ввод завершается с помощью `Ctrl-D`.
-- При использовании стека надо не забывать уменшать `rsp`.
-- Перед каждым вызовом `call` необходимо выравнивать стек кратно 16.
-- Вызовы `syscall` могут изменить значения регистров `rax`, `rcx` и `r11`.
-- Обратные кавычки позволяют использовать специальные символы в С-стиле (`\n`, `\t`).
+- A string of `n` bytes requires `n + 1` bytes because of the null terminator.
+- Function labels must be global; the rest should be local.
+- Registers do not contain zero by default.
+- If you use callee-saved registers, you must preserve their values.
+- If you use caller-saved registers, you must save their values before `call`
+  and restore them afterward.
+- Do not use buffers in the `.data` section. Allocate space on the stack by
+  decreasing `rsp` instead.
+- Functions receive arguments in `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9`.
+- Do not print numbers character by character. Build a string in memory and
+  call `print_string`.
+- Check that `parse_int` and `parse_uint` set `rdx` correctly; this is very
+  important for the next assignment.
+- Check that `parse_int`, `parse_uint`, and `read_word` behave correctly when
+  input ends with `Ctrl-D`.
+- When using the stack, remember to decrease `rsp`.
+- Before every `call`, align the stack to a multiple of 16.
+- `syscall` may change the values of `rax`, `rcx`, and `r11`.
+- Backticks allow C-style special characters such as `\n` and `\t`.
 
-Код решения занимает порядка 250 строк.
+The solution code is usually around 250 lines.

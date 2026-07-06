@@ -1,22 +1,23 @@
-# Вычислительная математика
+# Computational Mathematics
 
-![Вычислительная математика](media/compmath-meme.jpg)
+![Computational Mathematics](media/compmath-meme.jpg)
 
-![Вычислительная математика: проект](media/compmath-app.jpg)
+![Computational Mathematics: project](media/compmath-app.jpg)
 
-Материалы по дисциплине «Вычислительная математика» за 2 курс.
+Materials for the second-year Computational Mathematics course.
 
-Код вынесен в сабмодуль [`all_labs`](all_labs/) и отдельный репозиторий:
+The code is kept in the [`all_labs`](all_labs/) submodule and a separate
+repository:
 [e345ee/Computational_Mathematics](https://github.com/e345ee/Computational_Mathematics).
 
-## Лабораторные
+## Labs
 
-Внутри проекта собран набор численных методов: приближение функций,
-численное интегрирование, решение нелинейных уравнений и систем, решение ОДУ,
-а также Java-модуль для интерполяции методами Лагранжа, Ньютона, Гаусса,
-Стирлинга и Бесселя с построением графиков и тестами.
+The project contains a set of numerical methods: function approximation,
+numerical integration, solving nonlinear equations and systems, solving ODEs,
+and a Java module for interpolation with Lagrange, Newton, Gauss, Stirling, and
+Bessel methods, including plots and tests.
 
-## Стек
+## Stack
 
 ![Lua](https://img.shields.io/badge/Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white)
 ![Roblox Studio](https://img.shields.io/badge/Roblox_Studio-000000?style=for-the-badge&logo=roblox&logoColor=white)

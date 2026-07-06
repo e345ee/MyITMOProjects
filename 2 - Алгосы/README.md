@@ -1,16 +1,16 @@
-# Алгоритмы и структуры данных
+# Algorithms and Data Structures
 
-![Алгоритмы](media/algorithms.gif)
+![Algorithms](media/algorithms.gif)
 
-Материалы по дисциплине «Алгоритмы и структуры данных» за 2 курс.
+Materials for the second-year Algorithms and Data Structures course.
 
-## Лабораторные
+## Labs
 
-В папке лежит набор решений на C++: задачи на бинарный поиск, жадные
-алгоритмы, кучи и очереди с приоритетом, скользящее окно, кратчайшие пути,
-DSU, проверку связности и обходы графов.
+The directory contains a set of C++ solutions: binary search tasks, greedy
+algorithms, heaps and priority queues, sliding window, shortest paths, DSU,
+connectivity checks, and graph traversals.
 
-## Стек
+## Stack
 
 ![C++17](https://img.shields.io/badge/C%2B%2B17-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
 ![Algorithms](https://img.shields.io/badge/Algorithms-0F172A?style=for-the-badge)

@@ -1,13 +1,13 @@
-# Тестирование программного обеспечения
+# Software Testing
 
-Материалы по дисциплине «Тестирование программного обеспечения» за 3 курс.
+Materials for the third-year Software Testing course.
 
-## Ссылка
+## Link
 
-- [Лабораторные работы](https://github.com/e345ee/test-slave)
+- [Lab Work](https://github.com/e345ee/test-slave)
 
-  Репозиторий с лабораторными по модульному, интеграционному,
-  функциональному, нагрузочному и стресс-тестированию.
+  Repository with labs on unit, integration, functional, load, and stress
+  testing.
 
   ![Java](https://img.shields.io/badge/Java_8%2F17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
   ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
@@ -20,9 +20,9 @@
   ![CSV](https://img.shields.io/badge/CSV-475569?style=for-the-badge)
   ![Typst](https://img.shields.io/badge/Typst-239DAD?style=for-the-badge&logo=typst&logoColor=white)
 
-## Кратко по лабораторным
+## Lab Summary
 
-- ЛР1 - модульное тестирование: `arccos(x)` через ряд, красно-чёрное дерево и доменная модель.
-- ЛР2 - интеграционное тестирование системы функций с табличными заглушками, Mockito, CSV-выгрузками и графиками.
-- ЛР3 - функциональное UI-тестирование сайта ПИК: тест-кейсы, checklist, Selenium WebDriver, Page Object, Chrome/Firefox.
-- ЛР4 - нагрузочное и стресс-тестирование веб-приложения в Apache JMeter с анализом времени отклика и графиками.
+- Lab 1 - unit testing: `arccos(x)` through a series, a red-black tree, and a domain model.
+- Lab 2 - integration testing of a function system with table stubs, Mockito, CSV exports, and plots.
+- Lab 3 - functional UI testing of the PIK website: test cases, checklist, Selenium WebDriver, Page Object, Chrome/Firefox.
+- Lab 4 - load and stress testing of a web application in Apache JMeter with response time and chart analysis.

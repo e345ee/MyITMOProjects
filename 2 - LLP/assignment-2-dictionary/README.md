@@ -1,111 +1,114 @@
-# Assignment №2:  Dictionary in assembly
----
-Лабораторная работа №2: словарь на assembler
+# Dictionary
 
+Lab work 2: a dictionary in Assembly.
 
-# Подготовка
+# Preparation
 
-* Прочитайте первые главы 3,4,5 "Low-level programming: C, assembly and program execution". 
+* Read chapters 3, 4, and 5 of "Low-level programming: C, assembly and program
+  execution".
 
-На защите мы можем обсуждать цикл компиляции, роль компоновщика, препроцессора, устройство виртуальной памяти и связь между секциями, сегментами, регионами памяти. Также можем поговорить про кольца защиты и привилегированный режим.
+During the defense, we may discuss the compilation cycle, the role of the
+linker and preprocessor, virtual memory organization, and the relationship
+between sections, segments, and memory regions. We may also discuss protection
+rings and privileged mode.
 
+## Linked List
 
-## Связный список
+A linked list is a data structure. An empty list is a null pointer; a non-empty
+list is a pointer to the first list element. Each element contains data and a
+pointer to the next element.
 
-Связный список &mdash; это структура данных. Пустой список это нулевой указатель; непустой список это указатель на первый элемент списка.
-Каждый элемент содержит данные и указатель на следующий элемент.
+For example, a linked list `(100, 200, 300)` may start at the pointer `x1`:
 
-
-Вот пример связного списка (100, 200, 300). 
-Его начало можно найти по указателю `x1`:
-
-```nasm
-section .data
-
-x1: 
-dq x2
-dq 100
-
-x2: 
-dq x3
-dq 200
-
-x3: 
-dq 0
-dq 300
-```
- 
-Часто есть необходимость хранить набор данных в каком-то контейнере. С контейнером мы производим операции доступа к его элементам, добавления элемента в начало или конец, или на произвольную позицию, сортировки.
-
-Разные контейнеры делают одни из этих операций лёгкими и быстрыми, а другие &mdash; медленными.
-Например, в массив неудобно добавлять элементы, но можно быстро обратиться к уже сущестующему по индексу.
-В связный список, наоборот, удобно добавлять элементы в любое место, но доступ по индексу сложнее &mdash; нужно просмотреть весь список с самого начала.
-
-## Задание
-
-Необходимо реализовать на ассемблере словарь в виде связного списка.
-Каждое вхождение содержит адрес следующей пары в словаре, ключ и значение. 
-Ключи и значения &mdash; адреса нуль-терминированых строк.
-
-Словарь задаётся статически, каждый новый элемент добавляется в его начало. 
-С помощью макросов мы автоматизируем этот процесс так, что указав с помощью новой конструкции языка новый элемент он автоматически добавится в начало списка, и указатель на начало списка обновится. Таким образом нам не нужно будет вручную поддерживать правильность связей в списке. 
-
-Создайте макрос `colon` с двумя аргументами: ключом и меткой, которая будет сопоставлена значению.
-Эта метка не может быть сгенерирована из самого значения, так как в строчке могут быть символы, которые не могут встречаться в метках, например, арифметические знаки, знаки пунктуации и т.д. После использования такого макроса можно напрямую указать значение, сопоставляемое ключу. Пример использования:
-
-```nasm
-section .data
-
-colon "third word", third_word
-db "third word explanation", 0
-
-colon "second word", second_word
-db "second word explanation", 0 
-
-colon "first word", first_word
-db "first word explanation", 0 
+```text
+x1 -> [100 | *-] -> [200 | *-] -> [300 | 0]
 ```
 
+Containers store sets of data and provide operations such as accessing
+elements, inserting elements at the beginning, at the end, or at an arbitrary
+position, and sorting.
 
-В реализации необходимо предоставить следующие файлы:
+Different containers make some operations easy and fast while making others
+slow. For example, arrays are inconvenient for insertion, but existing elements
+can be accessed quickly by index. Linked lists make insertion convenient, but
+index-based access is harder because the list must be traversed from the start.
 
-- `lib.asm` - библиотека ввода-вывода из первого задания
-- `lib.inc` - заголовочный файл к библиотеке ввода-вывода
-- `colon.inc` - заголовочный файл с определением макроса `colon`
-- `dict.asm` - реализация функции `find_word` для поиска в словаре
-- `dict.inc` - заголовочный файл для функции поиска в словаре
-- `words.inc` - определене словаря, который будет использоваться в тестах
-- `main.asm` - реализация простейшего консольного интерфейса для поиска в словаре
+## Assignment
 
-### Указания
+Implement an Assembly dictionary as a linked list.
 
-- Оформите функции, которые вы реализовали в первой лабораторной работе, в виде отдельной библиотеки `lib.o`.
+Each entry contains the address of the next key-value pair, a key, and a value.
+Keys and values are addresses of null-terminated strings.
 
-  Не забудьте все названия функций сделать глобальными метками и перечислить их в `lib.inc`.
+The dictionary is defined statically, and each new element is added to its
+beginning. Macros automate this process: when a new element is declared through
+a new language construct, it is automatically added to the beginning of the
+list and the pointer to the list head is updated. This removes the need to
+manually maintain list links.
 
-- -  Что бы не копировать файлы между репозиториями можно добавить репозиторий 
-     с первой лабораторной работой в качестве [модуля git](https://git-scm.com/book/ru/v2/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B-Git-%D0%9F%D0%BE%D0%B4%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B8)
-- -  По умолчанию, CI раннеры не загружают содержимое подмодулей, это нужно делать дополнительной командой
-     `git submodule update --init --recursive`
-- Создайте файл `colon.inc` и определите в нём макрос для создания слов в словаре. 
+Create a `colon` macro with two arguments: a key and the label associated with
+the value. The label cannot be generated from the value itself because the
+string may contain characters that cannot appear in labels, such as arithmetic
+symbols or punctuation. After using the macro, the value associated with the key
+can be specified directly.
 
-  Макрос принимает два параметра:
-    - Ключ (в кавычках)
-    - Имя метки, по которой будет находиться значение.
+Example:
 
-- В файлах `dict.asm` и `dict.inc` создать функцию `find_word`. Она принимает два аргумента:
-  - Указатель на нуль-терминированную строку.
-  - Указатель на начало словаря.
+```nasm
+colon "hello", hello_value
+db "world", 0
+```
 
-  `find_word` пройдёт по всему словарю в поисках подходящего ключа. Если подходящее вхождение найдено, вернёт адрес *начала вхождения в словарь* (не значения), иначе вернёт 0. 
+The implementation must provide these files:
 
-- Файл `words.inc` должен хранить слова, определённые с помощью макроса  `colon`. Включите этот файл в `main.asm`.
-- В `main.asm` определите функцию `_start`, которая:
-  
-  - Читает строку размером не более 255 символов в буфер с `stdin`.
-  - Пытается найти вхождение в словаре; если оно найдено, распечатывает в `stdout` значение по этому ключу. Иначе выдает сообщение об ошибке.
+- `lib.asm` - input/output library from the first assignment
+- `lib.inc` - header file for the input/output library
+- `colon.inc` - header file with the `colon` macro definition
+- `dict.asm` - implementation of the `find_word` dictionary lookup function
+- `dict.inc` - header file for the dictionary lookup function
+- `words.inc` - dictionary definition used in tests
+- `main.asm` - simplest console interface for dictionary lookup
 
-  Не забудьте, что сообщения об ошибках нужно выводить в `stderr`.
+### Notes
 
-- Обязательно предоставьте `Makefile`, который будет учитывать зависимости файлов для корректной сборки задания. Целью по-умолчанию должна быть сборка задания.
-- Напишите тесты для вашей реализации словаря. Тесты должны запускаться целью `test` мейкфайла.
+- Package the functions implemented in the first lab as a separate `lib.o`
+  library.
+
+  Remember to make all function names global labels and list them in `lib.inc`.
+
+- To avoid copying files between repositories, you may add the first lab
+  repository as a Git submodule.
+
+- By default, CI runners do not download submodule contents; that requires an
+  additional command.
+
+- Create `colon.inc` and define a macro for creating dictionary words.
+
+  The macro accepts two parameters:
+  - key, in quotes
+  - label name used to find the value
+
+- Create the `find_word` function in `dict.asm` and `dict.inc`. It accepts two
+  arguments:
+  - pointer to a null-terminated string
+  - pointer to the beginning of the dictionary
+
+  `find_word` traverses the entire dictionary looking for a matching key. If a
+  matching entry is found, it returns the address of the beginning of the
+  dictionary entry, not the value. Otherwise, it returns `0`.
+
+- `words.inc` must store words defined through the `colon` macro. Include this
+  file in `main.asm`.
+
+- Define `_start` in `main.asm`. It should:
+  - read a string of no more than 255 characters from `stdin` into a buffer;
+  - try to find an entry in the dictionary;
+  - print the value for the key to `stdout` if found;
+  - print an error message otherwise.
+
+  Remember that error messages must be printed to `stderr`.
+
+- Provide a `Makefile` that tracks file dependencies correctly. The default
+  target must build the assignment.
+- Write tests for the dictionary implementation. Tests must run through the
+  `test` target in the Makefile.

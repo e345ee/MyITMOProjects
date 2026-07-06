@@ -1,16 +1,16 @@
-# Лабораторная работа №3: PostgreSQL + PgBouncer
+# Lab Work 3: PostgreSQL + PgBouncer
 
-Стенд:
+Stand:
 
-| Узел | IP | Роль |
+| Node | IP | Role |
 |---|---|---|
-| `pg1` | `203.0.113.10` | PostgreSQL primary до сбоя |
-| `pg2` | `203.0.113.11` | PostgreSQL standby до сбоя |
+| `pg1` | `203.0.113.10` | PostgreSQL primary before failure |
+| `pg2` | `203.0.113.11` | PostgreSQL standby before failure |
 | `client` | `203.0.113.12` | PgBouncer, Ansible, psql, auto-failover |
 
-Ansible запускается с `client`.
+Ansible runs from `client`.
 
-## Быстрый запуск
+## Quick Start
 
 ```bash
 ssh root@203.0.113.12
@@ -19,37 +19,37 @@ ansible all -i inventory.ini -m ping
 ansible-playbook -i inventory.ini site.yml
 ```
 
-Проверка подключения через PgBouncer:
+Connection check through PgBouncer:
 
 ```bash
 psql -h 127.0.0.1 -p 6432 -U appuser -d labdb
 ```
 
-В PgBouncer есть три входа:
+PgBouncer has three entry points:
 
 ```text
-labdb    -> текущий primary
-labdb_rw -> primary для чтения/записи
-labdb_ro -> standby для чтения с реплики
+labdb    -> current primary
+labdb_rw -> primary for read/write access
+labdb_ro -> standby for replica reads
 ```
 
-Проверка чтения с реплики:
+Replica read check:
 
 ```bash
 psql -h 127.0.0.1 -p 6432 -U appuser -d labdb_ro
 ```
 
-На реплику писать нельзя. Это нормально: standby работает только на чтение.
+Writes to the replica are not allowed. This is expected: standby works in read-only mode.
 
-## Что менять
+## What to Change
 
-Основные переменные находятся в:
+The main variables are located in:
 
 ```bash
 group_vars/all.yml
 ```
 
-Обычно меняются:
+Usually changed values:
 
 ```yaml
 app_password: "<APP_PASSWORD>"
@@ -59,70 +59,70 @@ pg2_private_ip: "10.0.0.11"
 client_private_ip: "10.0.0.12"
 ```
 
-Если приватной сети нет, публичные IP используются и как рабочие адреса.
+If there is no private network, public IPs are also used as working addresses.
 
-## Этап 2
+## Stage 2
 
-Клиентские подключения запускаются на `client`:
+Client connections are started on `client`:
 
 ```bash
 ./scripts/open_read_client.sh
 ./scripts/open_write_client.sh
 ```
 
-Переполнение диска запускается на `pg1`:
+Disk filling is started on `pg1`:
 
 ```bash
 ssh root@203.0.113.10
 bash /usr/local/bin/fill_pgdata_disk.sh
 ```
 
-Лог автоматического failover смотреть на `client`:
+Watch the automatic failover log on `client`:
 
 ```bash
 sudo tail -f /var/log/pg_auto_failover.log
 ```
 
-## Этап 3
+## Stage 3
 
-Ручной сценарий восстановления находится в:
-
-```bash
-./scripts/manual_recovery_switchback.sh
-```
-
-Он выводит команды и пояснения:
+The manual recovery scenario is located at:
 
 ```bash
 ./scripts/manual_recovery_switchback.sh
 ```
 
-## Зачистка стенда
+It prints commands and explanations:
 
-Для полного сброса перед повторным запуском:
+```bash
+./scripts/manual_recovery_switchback.sh
+```
+
+## Stand Cleanup
+
+For a full reset before rerunning:
 
 ```bash
 ansible-playbook -i inventory.ini cleanup.yml
 ansible-playbook -i inventory.ini site.yml
 ```
 
-## SSH-доступ без пароля
+## Passwordless SSH Access
 
-При первом запуске playbook можно запускать с ключами `-k -K`, чтобы Ansible подключился по root-паролю. После этого Ansible сам создаёт SSH-ключ на машине `client` и добавляет его на `pg1` и `pg2`.
+On the first run, the playbook can be launched with `-k -K` so Ansible connects using the root password. After that, Ansible creates an SSH key on the `client` machine and adds it to `pg1` and `pg2`.
 
-Первый запуск:
+First run:
 
 ```bash
 ansible-playbook -i inventory.ini site.yml -k -K
 ```
 
-Следующие запуски можно выполнять уже без ввода пароля:
+Subsequent runs can be performed without entering a password:
 
 ```bash
 ansible-playbook -i inventory.ini site.yml
 ```
 
-Failover-скрипт также использует этот ключ, чтобы машина `client` могла выполнить `pg_ctl promote` на `pg2` по SSH без пароля.
+The failover script also uses this key so the `client` machine can run `pg_ctl promote` on `pg2` over SSH without a password.
 
 
-Скрипт `fill_pgdata_disk.sh` заполняет раздел с PGDATA, вызывает тестовую тяжёлую запись в PostgreSQL, печатает релевантные ошибки из логов и останавливает PostgreSQL на `pg1`, чтобы auto-failover гарантированно обнаружил отказ. Для отключения остановки можно запускать так: `STOP_POSTGRES_AFTER_FAIL=0 bash /usr/local/bin/fill_pgdata_disk.sh`.
+The `fill_pgdata_disk.sh` script fills the PGDATA partition, triggers a heavy test write in PostgreSQL, prints relevant errors from the logs, and stops PostgreSQL on `pg1` so auto-failover reliably detects the failure. To disable the stop step, run it as: `STOP_POSTGRES_AFTER_FAIL=0 bash /usr/local/bin/fill_pgdata_disk.sh`.

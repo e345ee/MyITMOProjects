@@ -1,27 +1,27 @@
-# Архитектура компьютера
+# Computer Architecture
 
-![Архитектура компьютера](media/archcomp-meme.jpg)
+![Computer Architecture](media/archcomp-meme.jpg)
 
-![Архитектура компьютера: демонстрация 1](media/archcomp-main.gif)
+![Computer Architecture: demo 1](media/archcomp-main.gif)
 
-![Архитектура компьютера: демонстрация 2](media/archcomp-extra.gif)
+![Computer Architecture: demo 2](media/archcomp-extra.gif)
 
-![Архитектура компьютера: демонстрация 3](media/archcomp-second-batch.gif)
+![Computer Architecture: demo 3](media/archcomp-second-batch.gif)
 
-Материалы по дисциплине «Архитектура компьютера» за 2 курс.
+Materials for the second-year Computer Architecture course.
 
-В папке лежат лабораторные для учебных архитектур `acc32`, `f32a` и
-`risc-iv`, YAML-сценарии проверки, схема RISC-IV и доклад по процессорам
-«Эльбрус» на архитектуре E2K.
+The directory contains labs for the educational `acc32`, `f32a`, and `risc-iv`
+architectures, YAML validation scenarios, a RISC-IV diagram, and a report on
+Elbrus processors based on the E2K architecture.
 
-## Лабораторные
+## Labs
 
-- `acc32` - программа вычисления Fibonacci на аккумуляторной архитектуре.
-- `f32a` - разворот битов и проверка результата через сценарий симуляции.
-- `risc-iv` - перевод Pascal-style строки в верхний регистр и вывод через
-  memory-mapped I/O.
+- `acc32` - Fibonacci calculation program for an accumulator architecture.
+- `f32a` - bit reversal with result validation through a simulation scenario.
+- `risc-iv` - conversion of a Pascal-style string to uppercase and output
+  through memory-mapped I/O.
 
-## Стек
+## Stack
 
 ![Assembly](https://img.shields.io/badge/Assembly-525252?style=for-the-badge)
 ![Computer Architecture](https://img.shields.io/badge/Computer_Architecture-0F172A?style=for-the-badge)

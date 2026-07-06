@@ -1,75 +1,73 @@
-# Работа с терминалом
+# Working with the Terminal
 
-## 1. Конфигурация
+## 1. Configuration
 
 ```bash
-$ mkdir ./build/
-$ cd ./build/
-$ cmake .. -DCMAKE_BUILD_TYPE=<config>
+cmake -B build -DCMAKE_BUILD_TYPE=<config>
 ```
 
-Вместо `<config>` можно использовать одну из существующих конфигураций:
+Instead of `<config>`, use one of the existing configurations:
 
-- **`Debug`** быстро компилируется и подходит для разработки.
-- **`ASan, LSan, MSan, UBSan`** подходят для отладки ошибок сегментации и других проблем с памятью. Рекомендуется 
-  запустить ваш код с санитайзерами перед отправкой на проверку!
-- **`Release`** нужен для сборки кода с оптимизациями и проверки скорости выполнения.
+- **`Debug`** builds quickly and is suitable for development.
+- **`ASan, LSan, MSan, UBSan`** are useful for debugging segmentation faults and
+  other memory problems. It is recommended to run your code with sanitizers
+  before submitting it for review.
+- **`Release`** is used to build optimized code and check performance.
 
-## 2. Сборка
+## 2. Build
 
 ```bash
-$ cmake --build ./build/
+cmake --build build
 ```
 
-Исполняемые файлы `./build/solution/image-transformer` и `./build/tester/image-matcher`
-будут собраны, их можно использовать для ручного тестирования.
+The executable files `./build/solution/image-transformer` and
+`./build/tester/image-matcher` will be built and can be used for manual testing.
 
-## 3. Тестирование
+## 3. Testing
 
 ```bash
-$ cmake --build ./build/ --target check
-# ИЛИ
-$ cd ./build/
-$ ctest --output-on-failure
+ctest --test-dir build
 ```
 
-## Бонус: `ssh` + `git`
-
-### Как настроить SSH ключи
+Or:
 
 ```bash
-$ ssh-keygen
-$ cat ~/.ssh/id_rsa.pub
+cmake --build build --target test
 ```
 
-В настройках профиля GitLab нужно открыть категорию `SSH Keys`, добавить новый
-ключ и скопировать содержимое `id_rsa.pub` туда.
+## Bonus: `ssh` + `git`
 
-### Как склонировать форк
+### How to Set Up SSH Keys
 
 ```bash
-$ git clone ssh://git@gitlab.se.ifmo.ru:4815/<my username>/assignment-image-rotation.git
-$ cd ./assignment-image-rotation/
+ssh-keygen
+cat ~/.ssh/id_rsa.pub
 ```
 
-### Как отправить свои изменения обратно в форк
+Open the `SSH Keys` category in your GitLab profile settings, add a new key,
+and paste the contents of `id_rsa.pub` there.
+
+### How to Clone a Fork
 
 ```bash
-$ git add ./solution/
-$ git status
-$ git commit -m "Lab complete"
-$ git push origin master
+git clone git@gitlab.se.ifmo.ru:<your-user>/<repo>.git
 ```
 
-После того, как вы откроете merge request, каждое новое изменение, добавленное таким образом,
-будет появляться там автомагически.
-
-### Как обновить свою лабораторную, если преподаватель попросил "подтянуть к себе свежие изменения" из основного репозитория
+### How to Push Your Changes Back to the Fork
 
 ```bash
-$ git remote add upstream ssh://git@gitlab.se.ifmo.ru:4815/programming-languages/assignment-image-rotation.git
-$ git fetch upstream
-$ git checkout master
-$ git merge upstream/master
-$ git remote remove upstream
+git add .
+git commit -m "Implement solution"
+git push
+```
+
+After you open a merge request, every new change pushed this way will appear
+there automatically.
+
+### How to Update Your Lab When the Teacher Asks You to Pull Fresh Changes
+
+```bash
+git remote add upstream <main-repository-url>
+git fetch upstream
+git merge upstream/master
 ```

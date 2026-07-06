@@ -1,100 +1,97 @@
-# Создание виртуального интерьера
+# Virtual Interior Creation
 
-Данный проект выполнен в рамках дисциплины  
-«Полигональное моделирование».
+This project was completed as part of the  
+Polygonal Modeling course.
 
-Проект представляет собой 3D-модель интерьера комнаты,
-разработанную и оптимизированную для дальнейшего импорта
-в игровой движок.
+The project is a 3D model of a room interior, designed and optimized for
+further import into a game engine.
 
-## Скачать
+## Download
 
-[Ссылка на скачивание](https://drive.google.com/file/d/1b--E-91rLkcuaTpz3twA8b0w254AoTbJ/view?usp=sharing)
-
----
-
-## Превью
-
-![Финальный рендер](Проект/Рендеры/рендер1.jpg)
+[Download link](https://drive.google.com/file/d/1b--E-91rLkcuaTpz3twA8b0w254AoTbJ/view?usp=sharing)
 
 ---
 
-## Цель работы
+## Preview
 
-Создать виртуальный интерьер и подготовить его для импорта
-в движок с соблюдением технических ограничений и требований
-к оптимизации сцены.
+![Final render](%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82/%D0%A0%D0%B5%D0%BD%D0%B4%D0%B5%D1%80%D1%8B/%D1%80%D0%B5%D0%BD%D0%B4%D0%B5%D1%801.jpg)
 
-## Техническое задание
+---
 
-Интерьер должен включать:
+## Project Goal
 
-- стены с дверью  
-- кресло и диван  
-- стол  
-- телевизор  
-- тумбу под телевизор  
-- сейф  
-- ключ  
-- декор (вазы, книги, мини-статуи)  
-- светильники  
+Create a virtual interior and prepare it for import into an engine while
+meeting technical constraints and scene optimization requirements.
 
-Дополнительные требования:
+## Technical Specification
 
-- все объекты выполнены разными методами моделирования  
-- корректная UV-развёртка для всех моделей  
-- материалы оптимизированы под игровой движок (используются запечённые текстуры)  
-- сцена содержит настроенное освещение  
-- подготовлены финальные рендеры  
-- общий лимит геометрии: не более 10 000 полигонов  
-- проект подготовлен к импорту в движок  
+The interior must include:
 
-## Этапы работы
+- walls with a door  
+- an armchair and a sofa  
+- a table  
+- a television  
+- a TV stand  
+- a safe  
+- a key  
+- decor (vases, books, mini-statues)  
+- lamps  
 
-1. Сбор референсов и анализ интерьерных решений  
-2. Планировка пространства  
-3. Моделирование объектов интерьера  
-4. UV-развёртка  
-5. Текстурирование  
-6. Ретопология  
-7. Запекание текстур  
-8. Оптимизация геометрии  
-9. Настройка освещения сцены  
-10. Финальный рендер  
-11. Подготовка сцены к экспорту  
+Additional requirements:
 
-## Использованные техники
+- all objects are made using different modeling methods  
+- correct UV unwrapping for all models  
+- materials are optimized for a game engine (baked textures are used)  
+- the scene includes configured lighting  
+- final renders are prepared  
+- total geometry limit: no more than 10,000 polygons  
+- the project is prepared for import into an engine  
 
-- полигональное моделирование  
-- работа с модификаторами  
-- ретопология  
-- UV-развёртка  
-- текстурирование  
-- запекание карт (baking)  
-- оптимизация под игровой движок  
-- настройка освещения  
+## Work Stages
 
-## Структура проекта
+1. Collecting references and analyzing interior solutions  
+2. Space planning  
+3. Modeling interior objects  
+4. UV unwrapping  
+5. Texturing  
+6. Retopology  
+7. Texture baking  
+8. Geometry optimization  
+9. Scene lighting setup  
+10. Final render  
+11. Preparing the scene for export  
 
-```
-3 - Полигональное моделирование/
-└─ Проект/
-   ├─ Рендеры/       # финальные рендеры сцены
-   ├─ report.pdf     # отчёт / презентация по проекту
+## Techniques Used
+
+- polygonal modeling  
+- working with modifiers  
+- retopology  
+- UV unwrapping  
+- texturing  
+- map baking  
+- optimization for a game engine  
+- lighting setup  
+
+## Project Structure
+
+```text
+project-root/
+└─ project/
+   ├─ renders/       # final scene renders
+   ├─ report.pdf     # project report / presentation
    └─ README.md
 ```
 
-## Результат
+## Result
 
-В результате был создан виртуальный интерьер,
-соответствующий требованиям технического задания:
+As a result, a virtual interior was created that meets the technical
+specification:
 
-- все ключевые объекты интерьера смоделированы вручную  
-- сцена оптимизирована по количеству полигонов  
-- материалы подготовлены для импорта в движок  
-- настроено освещение  
-- выполнены финальные рендеры  
+- all key interior objects were modeled manually  
+- the scene was optimized by polygon count  
+- materials were prepared for engine import  
+- lighting was configured  
+- final renders were produced  
 
-Проект готов для дальнейшего использования
-в игровом движке или интерактивном приложении.
-
+The project is ready for further use in a game engine or interactive
+application.

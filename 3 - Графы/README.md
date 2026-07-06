@@ -1,4 +1,4 @@
-# Граф знаний по Genshin Impact
+# Genshin Impact Knowledge Graph
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![RDF](https://img.shields.io/badge/RDF-0C5DA5?style=for-the-badge&logo=w3c&logoColor=white)
@@ -10,56 +10,56 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 
-Проект по дисциплине «Графы знаний»: командный граф знаний для Genshin
-Impact, который помогает подбирать отряды, оружие и артефакты с учетом
-стихий, уязвимостей противников, редкости персонажей и рекомендаций по
-снаряжению.
+Project for the Knowledge Graphs course: a team-built knowledge graph for
+Genshin Impact that helps choose teams, weapons, and artifacts while accounting
+for elements, enemy vulnerabilities, character rarity, and equipment
+recommendations.
 
-Команда: Артем Назин, Данила Мартышов, Григорий Садовой.
+Team: Artem Nazin, Danila Martyshov, Grigory Sadovoy.
 
-## Что внутри
+## What's Inside
 
-- `ontology.rdf` - готовая RDF/OWL-онтология по Genshin Impact.
-- `ontology_empty.rdf` - минимальная версия онтологии со схемой классов и свойств.
-- `sparql/` - набор SPARQL-запросов к графу знаний.
-- `embeddings.ipynb` - эксперименты с graph embeddings: DistMult, PyKEEN, кластеризация и поиск похожих сущностей.
-- `GrafsOneMore-master/` - парсеры данных, обработчики CSV и генератор RDF.
-- `Genshin Impact.pdf` - презентация проекта.
+- `ontology.rdf` - complete RDF/OWL ontology for Genshin Impact.
+- `ontology_empty.rdf` - minimal ontology version with class and property schema.
+- `sparql/` - a set of SPARQL queries for the knowledge graph.
+- `embeddings.ipynb` - graph embedding experiments: DistMult, PyKEEN, clustering, and similar entity search.
+- `GrafsOneMore-master/` - data parsers, CSV processors, and RDF generator.
+- `Genshin Impact.pdf` - project presentation.
 
-## Модель графа
+## Graph Model
 
-В графе описаны персонажи, команды, противники, оружие, типы оружия,
-артефакты, стихии, регионы, редкость и характеристики артефактов.
+The graph describes characters, teams, enemies, weapons, weapon types,
+artifacts, elements, regions, rarity, and artifact stats.
 
-Основные связи:
+Main relations:
 
-- персонаж -> стихия, регион, редкость, тип оружия;
-- персонаж -> лучшее и дополнительное оружие;
-- персонаж -> лучшие и дополнительные наборы артефактов;
-- персонаж -> рекомендуемые основные и дополнительные характеристики артефактов;
-- команда -> участники команды;
-- противник -> стихии, к которым он уязвим.
+- character -> element, region, rarity, weapon type;
+- character -> best and secondary weapons;
+- character -> best and secondary artifact sets;
+- character -> recommended main and secondary artifact stats;
+- team -> team members;
+- enemy -> elements it is vulnerable to.
 
-Готовая онтология содержит около **7.7k RDF-триплов**, **13 классов**,
-**14 объектных свойств** и почти **900 описанных сущностей**.
+The completed ontology contains about **7.7k RDF triples**, **13 classes**,
+**14 object properties**, and almost **900 described entities**.
 
-## SPARQL-запросы
+## SPARQL Queries
 
-В `sparql/queries/` лежат запросы, которые отвечают на прикладные игровые
-вопросы:
+The `sparql/queries/` directory contains queries that answer practical gameplay
+questions:
 
-- какие команды подходят против босса `The Knave`;
-- какие команды с Anemo-персонажами подходят против Anemo-уязвимых боссов;
-- какой сет артефактов подходит наибольшему числу персонажей против `Azhdaha`;
-- какие Cryo-персонажи могут использовать `Staff of Homa`;
-- какие команды формата 2 x 4★ + 2 x 5★ подходят против `Emperor of Fire and Iron`.
+- which teams are suitable against the `The Knave` boss;
+- which teams with Anemo characters are suitable against Anemo-vulnerable bosses;
+- which artifact set fits the largest number of characters against `Azhdaha`;
+- which Cryo characters can use `Staff of Homa`;
+- which 2 x 4★ + 2 x 5★ teams are suitable against `Emperor of Fire and Iron`.
 
-## Пайплайн
+## Pipeline
 
-1. Парсеры собирают данные о персонажах, командах и противниках из открытых
-   источников по Genshin Impact.
-2. CSV-данные нормализуются и преобразуются в сущности и связи.
-3. Генератор RDF собирает итоговую онтологию.
-4. SPARQL-запросы используются для проверки гипотез и получения рекомендаций.
-5. В ноутбуке обучаются embeddings графа для поиска похожих сущностей,
-   визуализации и кластеризации.
+1. Parsers collect data about characters, teams, and enemies from open Genshin
+   Impact sources.
+2. CSV data is normalized and converted into entities and relations.
+3. The RDF generator builds the final ontology.
+4. SPARQL queries are used to test hypotheses and generate recommendations.
+5. The notebook trains graph embeddings for similar entity search,
+   visualization, and clustering.

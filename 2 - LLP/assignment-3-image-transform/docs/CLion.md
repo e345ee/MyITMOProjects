@@ -1,30 +1,30 @@
-# Разработка с CLion
+# Development with CLion
 
-## 1. Выберите и склонируйте ваш форк с GitLab
+## 1. Select and clone your GitLab fork
 
-![Select project from VCS](CLion/01-get-from-vcs.png)
+Clone your fork of the assignment repository and open it in CLion.
 
-## 2. В окне проекта, выберите `CMakeLists.txt` на панели слева
+## 2. In the project window, select `CMakeLists.txt` in the left panel
 
-![Load CMake project](CLion/02-load-cmake-project.png)
+At the top of the editor window, CLion should show a prompt asking to load the
+CMake project. Click **`Load CMake project`**.
 
-Сверху окна с редактором появится подсказка, предлагающая загрузить CMake в проект. Нажмите **`Load CMake project`**.
+The build window may show an error such as `Unexpected build type MSan, possible
+values: Debug;Release;ASan;LSan;UBSan`. This means that the configuration is not
+available on your OS or with your compiler, but it will not prevent development
+with other configurations.
 
-В окне сборки может появиться ошибка, например: `Unexpected build type MSan, possible values: Debug;Release;ASan;LSan;UBSan`.
-Она означает, что данной конфигурации на вашей ОС или с вашим компилятором не предусмотрено,
-но разработке с другими конфигурациями она не помешает.
+## 3. Select the required configuration from the dropdown
 
-## 3. Выберите необходимую конфигурацию в раскрывающемся списке
+- **`Debug`** builds quickly and is suitable for development.
+- **`ASan, LSan, MSan, UBSan`** are useful for debugging segmentation faults and
+  other memory problems. It is recommended to run your code with sanitizers
+  before submitting it for review.
+- **`Release`** is used to build optimized code and check performance.
 
-![Choose Config](CLion/03-choose-configuration.png)
+Select **`All CTest`** as the build target. You can now build and run the
+project using the buttons in the top-right corner as usual.
 
-- **`Debug`** быстро компилируется и подходит для разработки.
-- **`ASan, LSan, MSan, UBSan`** подходят для отладки ошибок сегментации и других проблем с памятью. Рекомендуется 
-  запустить ваш код с санитайзерами перед отправкой на проверку!
-- **`Release`** нужен для сборки кода с оптимизациями и проверки скорости выполнения.
-
-В качестве цели для сборки выберите **`All CTest`**. Теперь вы можете собирать проект и
-запускать его через кнопки сверху справа как обычно.
-
-Если при сборке вы получили ошибку вроде `C:\CLion 2022.2.4\bin\mingw\bin/ld.exe: cannot find -lasan`, значит, у вас
-нет нужной библиотеки для запуска данного профиля. Можете просто выбрать другую конфигурацию.
+If you get an error such as `C:\CLion 2022.2.4\bin\mingw\bin/ld.exe: cannot
+find -lasan`, the required library is missing for that profile. Select another
+configuration.

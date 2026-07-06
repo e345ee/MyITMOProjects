@@ -1,24 +1,25 @@
-# Программирование
+# Programming
 
-![Программирование](media/programming.gif)
+![Programming](media/programming.gif)
 
-Материалы по дисциплине «Программирование» за 1 курс.
+Materials for the first-year Programming course.
 
-## Лабораторные
+## Labs
 
-- `Lab1` - базовые конструкции Java и работа с простыми вычислениями.
-- `Lab2` - объектная модель с использованием библиотеки Pokémon.
-- `Lab3` и `Lab4` - развитие ООП-модели: классы, наследование, абстракции,
-  интерфейсы, исключения и моделирование предметной области.
-- `lab5` - консольное приложение для управления коллекцией `Product`,
-  сериализация в JSON через Gson, команды, менеджеры и обработка ошибок.
-- `lab6` - клиент-серверная версия приложения с разделением common/client/server,
-  UDP-обменом, Java NIO (`DatagramChannel`, `Selector`) и логированием Log4j2.
-- `lab7` - дальнейшее развитие клиент-серверного приложения: PostgreSQL через
-  JDBC, авторизация/регистрация, многопоточная обработка запросов и отдельные
-  common/client/server-модули.
+- `Lab1` - basic Java constructs and simple calculations.
+- `Lab2` - object model using the Pokemon library.
+- `Lab3` and `Lab4` - further development of the OOP model: classes,
+  inheritance, abstractions, interfaces, exceptions, and domain modeling.
+- `lab5` - console application for managing a `Product` collection, JSON
+  serialization through Gson, commands, managers, and error handling.
+- `lab6` - client-server version of the application split into
+  common/client/server modules, UDP communication, Java NIO (`DatagramChannel`,
+  `Selector`), and Log4j2 logging.
+- `lab7` - further development of the client-server application: PostgreSQL via
+  JDBC, authorization/registration, multithreaded request processing, and
+  separate common/client/server modules.
 
-## Стек
+## Stack
 
 ![Java SE](https://img.shields.io/badge/Java_SE_17-007396?style=for-the-badge&logo=openjdk&logoColor=white)
 ![OOP](https://img.shields.io/badge/OOP-2563EB?style=for-the-badge)

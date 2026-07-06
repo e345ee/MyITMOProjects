@@ -1,18 +1,18 @@
-# Информатика
+# Computer Science Basics
 
-![Информатика](media/informatics.jpg)
+![Computer Science Basics](media/informatics.jpg)
 
-Материалы по дисциплине «Информатика» за 1 курс.
+Materials for the first-year Computer Science Basics course.
 
-## Лабораторные
+## Labs
 
-- `Lab2` - отчет по лабораторной работе в формате DOCX.
-- `Lab3` - задачи на Python: арифметика, строки и регулярные выражения.
-- `Lab4` - работа с табличными данными: CSV, Excel, `pandas` и графики.
-- `Lab5` - преобразование XML в YAML и эксперименты с парсингом данных.
-- `Lab6` - верстка отчета в TeX/LaTeX с исходниками, изображениями и PDF.
+- `Lab2` - lab report in DOCX format.
+- `Lab3` - Python tasks: arithmetic, strings, and regular expressions.
+- `Lab4` - working with tabular data: CSV, Excel, `pandas`, and charts.
+- `Lab5` - XML-to-YAML conversion and data parsing experiments.
+- `Lab6` - report layout in TeX/LaTeX with sources, images, and PDF output.
 
-## Стек
+## Stack
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Regex](https://img.shields.io/badge/Regex-0F172A?style=for-the-badge)

@@ -1,18 +1,19 @@
-# Вычисление функции y = f(x)
+# Calculating the Function y = f(x)
 
-Этот проект содержит реализацию программы на **Assembly**, которая вычисляет значение функции y по заданному x .
+This project contains an **Assembly** program that calculates the value of
+`y` for a given `x`.
 
----
+## Program Features
 
-## Особенности программы
+- **Input:**  
+  `x` is entered in the `x * 1000` format. For example, for `x = -3.5`, the
+  input should be `-3500`.
 
-- **Ввод:**  
-     X вводится в формате  x * 1000 . Например, для  x = -3.5  ввод будет -3500.
+- **Output:**  
+  The program returns `y` in the `y * 1000` format. For example, if the
+  calculated result is `y = 2.5`, the output will be `2500`.
 
-- **Вывод:**  
-    Программа возвращает  y в формате  y * 1000. Например, если результат вычислений  y = 2.5 , вывод будет  2500.
+## Purpose
 
----
-
-<img alt="Function" src="https://github.com/e345ee/MyITMOProjects/blob/main/2%20-%20LLP/seminar4/media/image.png" height="350">
-Функция, значение которой мы вычисляем.
+The project demonstrates fixed-point arithmetic, branching, and function
+calculation in Assembly without floating-point input/output.

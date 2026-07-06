@@ -1,86 +1,56 @@
+# Common Mistakes
 
-- `bmp_header` маленький, всего-то 60 байт. Можно не создавать его в куче, а выделить в стеке.
+This file lists typical mistakes made in the image transformation assignment.
 
-- `image` маленький. Можно не создавать его в куче, а выделить в стеке и возвращать по значению.
+## Architecture
 
-- Эта функция нужна  только в одной части программы, которая работает с BMP файлами. Нет смысла делать её доступной извне. Можно определить только в .c файле и пометить как `static`.
+- Do not place all code in `main.c`. Split the solution into modules for file
+  I/O, BMP parsing/writing, image representation, transformations, and utility
+  functions.
+- Keep the internal image representation independent from BMP. The program
+  should be able to support other formats later without rewriting the rotation
+  logic.
+- Avoid global mutable state. Pass data through function arguments and return
+  values.
+- Make ownership clear: the code that allocates memory must also have a clear
+  path for freeing it.
 
-- `padding` считается многократно в разных частях программы. Можно сделать для этого отдельную функцию. 
+## Error Handling
 
-- Не используйте битовые операции для подсчёта padding. Компилятор оптимизирует то, что действительно безопасно оптимизировать.
+- Check every file operation.
+- Check every memory allocation.
+- Return meaningful error codes when execution cannot continue.
+- Treat non-critical cleanup problems, such as a failed `fclose`, as warnings
+  rather than fatal errors.
+- Do not ignore invalid input files or unsupported BMP formats.
 
-- Можно создавать `header` из `struct image`, тогда он сразу будет корректным. Хорошо, когда в коде не появляются не до конца сконструированные объекты.
+## BMP Format
 
-- Обработки ошибок в `fread`/`fwrite` нет.
+- Remember that BMP rows are padded to a multiple of 4 bytes.
+- Do not assume that the file stores pixels in the same order as your internal
+  image structure.
+- This assignment only requires support for 24-bit BMP files.
+- Validate header fields before reading pixel data.
+- Preserve required header values when writing the result.
 
-- При объявлении структуры как *локальной переменной* все её поля содержат мусор. 
-  Было бы неплохо прямо тут указать значения всех её полей.
-  Или хотя бы инициализировать  `= {0} `.
+## Memory
 
-- Разумно сделать функцию, которая будет считать адрес пикселя по его координатам.
+- Do not read arbitrary amounts of data into fixed-size buffers.
+- Free every allocated image buffer on all error paths.
+- Be careful with integer overflow when calculating image sizes and row
+  padding.
+- Avoid returning pointers to stack-allocated objects.
 
-- Можно совместить объявление и инициализацию.
+## Transformations
 
-- Сравниваются числа разных типов.
+- Rotation changes image dimensions.
+- Keep coordinate conversion logic explicit and test it on small images.
+- Avoid modifying the source image in place unless the algorithm is designed for
+  it.
 
-- Массив вместо `switch` удобнее для сопоставления строчек вариантам `enum`а.
+## Build and Tests
 
-- Сообщения о том, как выполняется программа &mdash; в `stderr`; её результаты  &mdash; в `stdout`.
-
-- Функция &mdash;  кандидат на `static`.
-
-- Как правило именуем функции, работающие со структурами, используя префикс `имя_структуры`. 
-
-- "Магические числа"
-
-- Эти функции принадлежат другой части программы, работающей с внутренним представлением картинки, не с bmp файлами.
-
-- Память под структуры выделять `calloc` не очень правильно. Лучше `malloc` + инициализация с помощью `={0}`.
-Причина: "инициализировать нулевыми значениями" != "заполнить нулевыми байтами". Нулевые значения у `float`/`double` не обязательно во всх битах  имеют нули. Нулевые указатели `NULL` не обязательно состоят из исключительно нулевых байтов (на некоторых архитектурах могут быть наоборот все биты установлены, т.е. -1).
-
-- Генерацию заголовка разумно выделить в отдельную функцию.
-
-- Проверку заголовка на корректность разумно выделить в отдельную функцию.
-
-- Любой указатель неявно преобразуется из `void*` в любой другой тип; каст не нужен.
-
-- Локальные переменные, которые не будут меняться, например, которые создаются для удобства, чтобы меньше писать, полезно пометить `const`.
-
-- Переменная объявляется вне цикла, но используется только внутри. Почему бы не совместить инициализацию и объявление?
-
-- Не стоит возвращать из функции строку об ошибке. Причина: её сложно анализировать. Неочевидно, как в вызывающей функции сделать проверку "а что именно пошло не так в `bmp_reader`?" и на основании её сделать то или иное действие. Придётся сравнивать строки, что долго. А ещё сообщения об ошибках могут быть на разных языках.
-Поэтому и делают перечисления чтобы сообщать о результатах выполнения функции. 
-
-- Не надо принимать заголовок BMP файла в аргументах функции, доступной для других частей программы!
-Это вынуждает вызывающего эту функцию *вообще знать* про заголовки bmp файлов, а ему это не нужно. Он хочет просто из картинки сделать .bmp файл.
-Тем более что bmp заголовок генерируется из `image`.
-
-- Пользователю трансформаций не хочется *вообще знать* про заголовки bmp файлов, ему это не нужно. Он хочет просто из картинки сделать .bmp файл.
-Поэтому всё про заголовок надо скрыть от него.
-В view-header была написана программа для отображения заголовков bmp файлов, а не программа для поворота картинок.
-
-
-
-- view-header это утилита для просмотра заголовков  bmp файлов, а не заготовка для вашей программы, которой bmp заголовки *неважны*.
-
-- Игнорируете ремарку про архитектуру, например, объявляя struct image там же, где и функции для работы с bmp файлом.
-Если мы хотим расширяемости и упрощения работы с частями программы, нужно выделить минимум три структурных части программы: адаптер для bmp -файлов, описание struct image и функций для работы с ней, и трансформации над image. Еслли у вас в рамках одного файла есть определения из более, чем одной части, что-то не так.
-
-- Память была выделена перед `return` в строчке ХХХ, теперь перед `return` с кодом ошибки её надо освободить.
-
-
-- Для примера возьмём:
-
-```
-uint8_t value = 0; 
-
-fwrite( &value, padding, 1, file);
-```
-
- 
-Здесь `fwrite`  записывает в файл `padding * 1` байт подряд начиная с адреса `&value`.
-
-
-- Такие маленькие функции, использующиеся только в одном файле, стоит помечать `static`. Тогда они не только могут быть встроены в местах вызова, но компилятор может удалить их определение из файла вообще.
-
-- Не стоит смешивать в одном проекте `camelCase` и `snake_case`.
+- Keep the provided CMake structure working.
+- Run the tester before submitting.
+- Build with sanitizers when possible.
+- Run `clang-tidy` if it is available in your environment.

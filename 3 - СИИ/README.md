@@ -1,21 +1,22 @@
-# Системы искусственного интеллекта
+# Artificial Intelligence Systems
 
-![Системы искусственного интеллекта](media/sii.gif)
+![Artificial Intelligence Systems](media/sii.gif)
 
-Материалы по дисциплине «Системы искусственного интеллекта» за 3 курс.
+Materials for the third-year Artificial Intelligence Systems course.
 
-## Лабораторные
+## Labs
 
-- `lab3` - линейная регрессия без готовой реализации из `sklearn`: ручной
-  расчет коэффициентов, разные наборы признаков и оценка качества через `R2`.
-- `lab4` - метод k-ближайших соседей: предобработка данных, масштабирование,
-  классификация и матрица ошибок.
-- `lab5` - деревья решений: построение дерева с Gain Ratio, оценка метрик,
-  ROC/PR-кривые и расчет AUC.
-- `lab6` - логистическая регрессия для классификации диабета: градиентный
-  спуск, анализ признаков и визуализация результатов.
+- `lab3` - linear regression without a ready-made `sklearn` implementation:
+  manual coefficient calculation, different feature sets, and quality
+  evaluation through `R2`.
+- `lab4` - k-nearest neighbors: data preprocessing, scaling, classification,
+  and a confusion matrix.
+- `lab5` - decision trees: building a tree with Gain Ratio, evaluating metrics,
+  ROC/PR curves, and calculating AUC.
+- `lab6` - logistic regression for diabetes classification: gradient descent,
+  feature analysis, and result visualization.
 
-## Стек
+## Stack
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)

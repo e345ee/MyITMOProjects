@@ -1,22 +1,22 @@
-# Проект по визуализации множеств Жюлиа и Мандельброта
+# Julia and Mandelbrot Set Visualization Project
 
-Этот проект создан в рамках учебного задания по курсу **Теория функций комплексного переменного (ТФКП)**. Он демонстрирует визуализацию фрактальных множеств Жюлиа и Мандельброта, основанную на итерационном анализе комплексных чисел.
+This project was created as part of an assignment for the **Theory of Functions of a Complex Variable (TFCV)** course. It demonstrates visualization of the Julia and Mandelbrot fractal sets based on iterative analysis of complex numbers.
 
-## 🔗 Ссылка на демонстрацию
-[Посмотреть сайт](https://se.ifmo.ru/~s368748/ТФКП/ДЗ1/)
+## 🔗 Demo Link
+[View the website](https://se.ifmo.ru/~s368748/%D0%A2%D0%A4%D0%9A%D0%9F/%D0%94%D0%971/)
 
-## 🧩 Описание проекта
+## 🧩 Project Description
 
-Проект реализует отрисовку:
+The project renders:
 
-- **Множества Мандельброта** — по формуле *zₙ₊₁ = zₙ² + c*, где *z₀ = 0*, и отображаются значения *c*, для которых последовательность не уходит в бесконечность.
-- **Множеств Жюлиа** — с фиксированным *c*, но разными стартовыми значениями *z₀*.
+- **The Mandelbrot set** using the formula *zₙ₊₁ = zₙ² + c*, where *z₀ = 0*, displaying the values of *c* for which the sequence does not escape to infinity.
+- **Julia sets** with a fixed *c* and different starting values *z₀*.
 
-Алгоритм основывается на проверке сходимости последовательности до заданного предела итераций и отображает результат в виде фрактального изображения.
+The algorithm checks sequence convergence up to a specified iteration limit and displays the result as a fractal image.
 
-## ⚙️ Технологии
+## ⚙️ Technologies
 
 - HTML5 / CSS3
 - JavaScript (Canvas API)
-- Простые численные методы итерации
-- Поддержка пользовательского выбора параметров
+- Simple numerical iteration methods
+- Support for user-selected parameters

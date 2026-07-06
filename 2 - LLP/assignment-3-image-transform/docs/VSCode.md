@@ -1,35 +1,38 @@
-# Разработка с Visual Studio Code
+# Development with Visual Studio Code
 
-Для разработки требуются расширения:
+Development requires these extensions:
 
-- **`CMake`** от `twxs` 
-- **`CMakeTools`** от `Microsoft` 
-- **`C/C++`** от `Microsoft` 
+- **`CMake`** by `twxs`
+- **`CMakeTools`** by `Microsoft`
+- **`C/C++`** by `Microsoft`
 
-Перезагрузите VSCode после установки расширений.
+Reload VS Code after installing the extensions.
 
-## 1. Выберите и склонируйте ваш форк с GitLab
+## 1. Select and clone your GitLab fork
 
-![Clone repository](VSCode/01-clone.png)
+Clone your fork of the assignment repository and open the project folder in VS
+Code.
 
-## 2. В окне проекта, выберите компилятор
+## 2. Select the compiler in the project window
 
-![Choose Kit](VSCode/02-choose-kit.png)
+VS Code should ask you to select a compiler when the project is opened. If it
+does not, click the wrench button on the bottom panel.
 
-VSCode предложит выбрать компилятор при открытии проекта. Если он этого не сделал,
-кликните по кнопке с гаечным ключом на нижней панели.
+On Windows, you most likely need the `Visual Studio` compiler with the `amd64`
+variant.
 
-На Windows, вероятнее всего, вам нужен компилятор `Visual Studio` с версией `amd64`.
+## 3. Select the configuration on the bottom panel
 
-## 3. Выберите конфигурацию на нижней панели
+- **`Debug`** builds quickly and is suitable for development.
+- **`ASan, LSan, MSan, UBSan`** are useful for debugging segmentation faults and
+  other memory problems. It is recommended to run your code with sanitizers
+  before submitting it for review.
+- **`Release`** is used to build optimized code and check performance.
 
-![Choose Config](VSCode/03-choose-config.png)
+Use **`Build`** on the same bottom panel to build the code and **`Run CTests
+tests`** to run tests.
 
-- **`Debug`** быстро компилируется и подходит для разработки.
-- **`ASan, LSan, MSan, UBSan`** подходят для отладки ошибок сегментации и других проблем с памятью. Рекомендуется 
-  запустить ваш код с санитайзерами перед отправкой на проверку!
-- **`Release`** нужен для сборки кода с оптимизациями и проверки скорости выполнения.
-
-На той же нижней панели, используйте кнопку **`Build`** для сборки кода и **`Run CTests tests`** для запуска тестов.
-
-Если во время сборки вы видите ошибку вроде `...\Microsoft.CppBuild.targets(457,5): error MSB8013: This project doesn't contain the Configuration and Platform combination of MSan|x64`, это означает что выбранная конфигурация на вашей системе не поддержана - выберите другую.
+If you see an error such as `...\Microsoft.CppBuild.targets(457,5): error
+MSB8013: This project doesn't contain the Configuration and Platform combination
+of MSan|x64`, the selected configuration is not supported on your system. Choose
+another one.

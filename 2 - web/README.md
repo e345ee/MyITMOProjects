@@ -1,23 +1,23 @@
-# Web-программирование
+# Web Programming
 
 ![Web](media/web.gif)
 
-![Web: часть 2](media/web2.gif)
+![Web: part 2](media/web2.gif)
 
-Материалы по дисциплине «Web-программирование» за 2 курс.
+Materials for the second-year Web Programming course.
 
-## Лабораторные
+## Labs
 
-- `lab1` - интерактивная страница с графиком области попадания, формой
-  ввода координат и Java-сервером через FastCGI.
-- `lab2` - Java Web-приложение в формате WAR: Servlet/JSP, Gradle-сборка,
-  `web.xml`, `persistence.xml` и серверная обработка результатов.
+- `lab1` - interactive page with a hit-area graph, coordinate input form, and
+  a Java server through FastCGI.
+- `lab2` - Java web application packaged as a WAR: Servlet/JSP, Gradle build,
+  `web.xml`, `persistence.xml`, and server-side result processing.
 - [`lab3`](https://github.com/e345ee/jsf-webapp-pointcatcher) - PointCatcher:
-  JSF/Jakarta Faces-приложение для проверки попадания точки в область,
-  сохранения истории в PostgreSQL, отображения результатов на графике и в
-  таблице, JMX-статистики и сборки WAR через Gradle/Ant.
+  JSF/Jakarta Faces application for checking whether a point hits an area,
+  saving history in PostgreSQL, displaying results on a chart and in a table,
+  JMX statistics, and building a WAR through Gradle/Ant.
 
-## Стек
+## Stack
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)

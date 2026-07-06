@@ -1,15 +1,15 @@
-# Информационные системы
+# Information Systems
 
-![Информационные системы](media/information-systems.jpg)
+![Information Systems](media/information-systems.jpg)
 
-Материалы по дисциплине «Информационные системы» за 3 курс.
+Materials for the third-year Information Systems course.
 
-Код, подробное описание, стек и инструкции по запуску вынесены в отдельные
-репозитории. В этом разделе оставлены только ссылки на нужные проекты.
+Code, detailed descriptions, stacks, and run instructions are kept in separate
+repositories. This section contains only links to the relevant projects.
 
-## Ссылки
+## Links
 
-- [Лабораторные работы по ИС](https://github.com/e345ee/municipal-objects-registry)
+- [Information Systems lab work](https://github.com/e345ee/municipal-objects-registry)
 
 ![Java](https://img.shields.io/badge/Java_17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/Spring_MVC-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
@@ -24,7 +24,7 @@
 ![React Query](https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)
 ![Zod](https://img.shields.io/badge/Zod-3068B7?style=for-the-badge&logo=zod&logoColor=white)
 
-- [Курсовая работа по ИС](https://github.com/e345ee/shar-platform)
+- [Information Systems course project](https://github.com/e345ee/shar-platform)
 
 ![Java](https://img.shields.io/badge/Java_17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot_3.2-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
@@ -41,4 +41,4 @@
 ![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 
-Курсовая работа сдана на **4**.
+The course project was graded **4**.

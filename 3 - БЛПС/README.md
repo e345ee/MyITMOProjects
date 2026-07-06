@@ -1,26 +1,26 @@
-# Бизнес-логика программных систем
+# Business Logic of Software Systems
 
-![Бизнес-логика программных систем](media/blps.jpg)
+![Business Logic of Software Systems](media/blps.jpg)
 
-Материалы по дисциплине «Бизнес-логика программных систем» за 3 курс.
+Materials for the third-year Business Logic of Software Systems course.
 
-В репозитории представлены только лабораторные работы №3 и №4: третья
-лабораторная развивала решения из ЛР1/ЛР2, а четвёртая перерабатывала
-предыдущий бизнес-процесс под Camunda.
+The repository includes only lab works 3 and 4: the third lab extended the
+solutions from lab 1/lab 2, while the fourth reworked the previous business
+process for Camunda.
 
-Предметная область обеих работ - процесс обработки откликов на вакансии
-в системе, похожей на hh.ru: кандидат подаёт отклик, система выполняет
-автоматический скрининг, рекрутер принимает решение, кандидат получает
-уведомления и отвечает на приглашение.
+The domain of both works is processing job applications in a system similar to
+hh.ru: a candidate submits an application, the system performs automatic
+screening, a recruiter makes a decision, and the candidate receives
+notifications and responds to invitations.
 
-## Ссылки
+## Links
 
-- [ЛР3: HH Process + Kafka](https://github.com/e345ee/hh-process-kafka)
+- [Lab 3: HH Process + Kafka](https://github.com/e345ee/hh-process-kafka)
 
-  Доработка приложения из ЛР2: асинхронная обработка откликов через
-  Apache Kafka и ZooKeeper, разделение ролей `app-api` и `app-worker`,
-  плановые задачи через `@Scheduled`, WebSocket-уведомления и интеграция
-  с внешней EIS/Odoo через JCA.
+  Improvement of the application from lab 2: asynchronous application
+  processing through Apache Kafka and ZooKeeper, separation of `app-api` and
+  `app-worker` roles, scheduled tasks through `@Scheduled`, WebSocket
+  notifications, and integration with an external EIS/Odoo through JCA.
 
   ![Java](https://img.shields.io/badge/Java_17-007396?style=for-the-badge&logo=openjdk&logoColor=white)
   ![Spring Boot](https://img.shields.io/badge/Spring_Boot_3.4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
@@ -37,13 +37,12 @@
   ![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
   ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-- [ЛР4: HH Process + Camunda](https://github.com/e345ee/hh-process-camunda)
+- [Lab 4: HH Process + Camunda](https://github.com/e345ee/hh-process-camunda)
 
-  Переработка процесса на BPMS: бизнес-логика вынесена в BPMN 2.0 и DMN,
-  Camunda работает как standalone-сервис, пользовательские действия
-  доступны через Camunda Tasklist и Forms, а Spring Boot-приложение
-  выполняет бизнес-операции через external tasks и разворачивается на
-  WildFly.
+  BPMS-based process redesign: business logic is moved to BPMN 2.0 and DMN,
+  Camunda runs as a standalone service, user actions are available through
+  Camunda Tasklist and Forms, and the Spring Boot application performs business
+  operations through external tasks and is deployed on WildFly.
 
   ![Java](https://img.shields.io/badge/Java_17-007396?style=for-the-badge&logo=openjdk&logoColor=white)
   ![Spring Boot](https://img.shields.io/badge/Spring_Boot_3.4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
@@ -60,7 +59,7 @@
   ![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
   ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-## Кратко по работам
+## Work Summary
 
-- ЛР3 - реализация асинхронного скрининга заявок по модели подписки: `application.submitted` -> worker -> `application.screened`, распределение обработки между узлами, закрытие просроченных приглашений и экспорт интервью во внешнюю EIS.
-- ЛР4 - перенос управляющей логики в Camunda: процессы вакансии, отклика, отмены интервью, изменения статуса вакансии, обработки таймаутов и уведомлений; автоскрининг и шаблоны уведомлений вынесены в DMN.
+- Lab 3 - implementation of asynchronous application screening with a subscription model: `application.submitted` -> worker -> `application.screened`, distributed processing between nodes, closing expired invitations, and exporting interviews to an external EIS.
+- Lab 4 - moving control logic to Camunda: vacancy, application, interview cancellation, vacancy status change, timeout handling, and notification processes; auto-screening and notification templates are moved to DMN.

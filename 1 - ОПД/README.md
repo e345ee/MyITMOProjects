@@ -1,12 +1,11 @@
-# Основы профессиональной деятельности
+# Foundations of Professional Activity
 
-![ОПД](media/opd.gif)
+![Foundations of Professional Activity](media/opd.gif)
 
-Материалы по дисциплине «Основы профессиональной деятельности» за 1 курс.
+Materials for the first-year Foundations of Professional Activity course.
 
-В папке лежат отчеты по лабораторным работам и исходники для задач на
-учебной ассемблерной архитектуре. Поздние лабораторные включают работу с
-памятью, вводом-выводом, обработкой символов и прерываниями.
-
+The directory contains lab reports and source code for tasks on an educational
+assembly architecture. Later labs cover memory, input/output, character
+processing, and interrupts.
 
 

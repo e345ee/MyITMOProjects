@@ -1,51 +1,51 @@
-# ⚡ Портативная одноступенчатая пушка Гаусса
+# ⚡ Portable Single-Stage Gauss Gun
 
-**Учебный проект по физике**, посвящённый разработке и демонстрации принципов работы электромагнитного ускорителя — пушки Гаусса.
+**Educational physics project** focused on developing and demonstrating the operating principles of an electromagnetic accelerator: a Gauss gun.
 
-> 📄 [Пояснительная записка](https://github.com/Umchik1222/MyITMOProjects/blob/main/2%20-%20Физика/semester_2/Проект_2/Пояснительная%20записка.pdf)
-
-
+> 📄 [Explanatory note](https://github.com/Umchik1222/MyITMOProjects/blob/main/2%20-%20%D0%A4%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/semester_2/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82_2/%D0%9F%D0%BE%D1%8F%D1%81%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%BA%D0%B0.pdf)
 
 
-## 📷 Визуальные материалы
 
-### 🎬 Демонстрация выстрела
-![Выстрел](https://github.com/Umchik1222/MyITMOProjects/blob/main/2%20-%20Физика/semester_2/Проект_2/media/demons.gif)
 
-### 🔧 Фото собранного устройства
-| Вид сбоку | Вид с другого боку |
+## 📷 Visual Materials
+
+### 🎬 Shot Demonstration
+![Shot](https://github.com/Umchik1222/MyITMOProjects/blob/main/2%20-%20%D0%A4%D0%B8%D0%B7%D0%B8%D0%BA%D0%B0/semester_2/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82_2/media/demons.gif)
+
+### 🔧 Assembled Device Photos
+| Side view | Other side view |
 |----------|------------|
 | ![](media/photo_2025-05-28_17-00-51.jpg) | ![](media/photo_2025-05-28_17-00-55.jpg) |
 
-### 📊 Электрическая схема
-![Схема подключения](media/Схема.png)
+### 📊 Electrical Circuit
+![Circuit diagram](media/%D0%A1%D1%85%D0%B5%D0%BC%D0%B0.png)
 
-## 🔍 Описание проекта
+## 🔍 Project Description
 
-Устройство разгоняет ферромагнитную пулю с помощью короткого импульса тока через катушку. Создаваемое магнитное поле втягивает сердечник внутрь катушки, превращая накопленную электрическую энергию в кинетическую.
+The device accelerates a ferromagnetic projectile using a short current pulse through a coil. The generated magnetic field pulls the core into the coil, converting stored electrical energy into kinetic energy.
 
-Принцип основан на законах:
-- Электромагнитной индукции (Фарадей–Ленц)
-- Сохранения энергии
-- Ньютона (для расчёта движения пули)
+The principle is based on:
+- Electromagnetic induction (Faraday-Lenz law)
+- Conservation of energy
+- Newton's laws for calculating projectile motion
 
-📌 **Параметры проекта:**
-- Ёмкость конденсатора: **2200 мкФ**
-- Напряжение: **390 В**
-- Масса пули: **6.62 г**
-- Скорость пули: **13.6 м/с (из симуляции)** / **18.6 м/с (эксперимент)**
-- КПД: **0.366% (симуляция)** / **0.514% (эксперимент)**
+📌 **Project parameters:**
+- Capacitor capacity: **2200 uF**
+- Voltage: **390 V**
+- Projectile mass: **6.62 g**
+- Projectile speed: **13.6 m/s (simulation)** / **18.6 m/s (experiment)**
+- Efficiency: **0.366% (simulation)** / **0.514% (experiment)**
 
-## 🧰 Использованные компоненты
+## 🧰 Components Used
 
-- Конденсатор 400 В, 2200 мкФ
-- Тиристор 40TPS12A (до 1200 В, 500 А)
-- Повышающий модуль ZVS
-- Медная катушка (761 виток, 42.5 м)
-- Ствол из пластика (немагнитный)
-- Источник питания: 4×9 В кроны
-- Диод 1N4007 и резисторы
+- 400 V, 2200 uF capacitor
+- 40TPS12A thyristor (up to 1200 V, 500 A)
+- ZVS boost module
+- Copper coil (761 turns, 42.5 m)
+- Plastic barrel (non-magnetic)
+- Power supply: 4x9 V batteries
+- 1N4007 diode and resistors
 
-**Автор:** Umchik1222  
-**Факультет:** ИТМО, Физика  
-**Дата:** 2025  
+**Author:** Umchik1222  
+**Faculty:** ITMO, Physics  
+**Date:** 2025  

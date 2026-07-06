@@ -1,15 +1,15 @@
-# Распределенные системы хранения данных
+# Distributed Data Storage Systems
 
-![Распределенные системы хранения данных](media/rshd.jpg)
+![Distributed Data Storage Systems](media/rshd.jpg)
 
-Материалы по дисциплине «Распределенные системы хранения данных» за 3 курс.
+Materials for the third-year Distributed Data Storage Systems course.
 
-Первые две лабораторные опубликованы в репозиториях коллеги, поэтому здесь
-оставлены ссылки на них. Третья лабораторная добавлена локально в папку
-[`lab3`](lab3/): из архива удалены служебные файлы, старые PDF и лишние
-материалы, исходники очищены от комментариев, отчет пересобран из Typst.
+The first two labs were published in a teammate's repositories, so this section
+keeps links to them. The third lab is added locally in [`lab3`](lab3/): service
+files, old PDFs, and unnecessary materials were removed from the archive, source
+files were cleaned of comments, and the report was rebuilt from Typst.
 
-## Стек
+## Stack
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL_14%2F16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![PgBouncer](https://img.shields.io/badge/PgBouncer-336791?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -24,28 +24,26 @@
 ![systemd](https://img.shields.io/badge/systemd-111827?style=for-the-badge&logo=linux&logoColor=white)
 ![Typst](https://img.shields.io/badge/Typst-239DAD?style=for-the-badge&logo=typst&logoColor=white)
 
-## Ссылки и состав
+## Links and Contents
 
-- [ЛР1: конфигурация PostgreSQL](https://github.com/Vaneshik/rshd-lab1)
+- [Lab 1: PostgreSQL configuration](https://github.com/Vaneshik/rshd-lab1)
 
-  Развертывание и настройка кластера PostgreSQL под OLAP-нагрузку:
-  инициализация `PGDATA`, настройка `pg_hba.conf`, параметров сервера через
-  `ALTER SYSTEM`, логирования, табличных пространств, ролей, базы данных и
-  тестового наполнения.
+  Deployment and configuration of a PostgreSQL cluster for OLAP workloads:
+  `PGDATA` initialization, `pg_hba.conf` setup, server parameters through
+  `ALTER SYSTEM`, logging, tablespaces, roles, database, and test data setup.
 
-- [ЛР2: резервное копирование и восстановление](https://github.com/Vaneshik/rshd-lab2)
+- [Lab 2: Backup and recovery](https://github.com/Vaneshik/rshd-lab2)
 
-  Сценарии disaster recovery для PostgreSQL 16 на FreeBSD: холодный полный
-  `rsync`-бэкап по cron с ротацией 14 копий, запуск СУБД на резервном узле,
-  восстановление после повреждения конфигурации и PITR-восстановление через
-  архивные WAL до момента перед `DROP TABLE`.
+  Disaster recovery scenarios for PostgreSQL 16 on FreeBSD: cold full `rsync`
+  backup via cron with 14-copy rotation, starting the DBMS on a backup node,
+  recovery after configuration damage, and PITR recovery through archived WAL
+  up to the moment before `DROP TABLE`.
 
-- [ЛР3: PostgreSQL HA + PgBouncer](lab3/)
+- [Lab 3: PostgreSQL HA + PgBouncer](lab3/)
 
-  Локально добавленный стенд на Ansible для трех Ubuntu-машин: `pg1` как
-  primary, `pg2` как standby, `client` как узел с PgBouncer, Ansible и
-  проверкой доступности. В лабораторной настраивается потоковая репликация,
-  read/write и read-only входы PgBouncer, симулируется отказ заполнением
-  раздела с `PGDATA`, выполняется автоматический failover на standby и ручное
-  восстановление исходной схемы.
-
+  Locally added Ansible stand for three Ubuntu machines: `pg1` as primary,
+  `pg2` as standby, and `client` as the node with PgBouncer, Ansible, and
+  availability checks. The lab configures streaming replication, read/write and
+  read-only PgBouncer entries, simulates failure by filling the `PGDATA`
+  partition, performs automatic failover to standby, and manually restores the
+  original topology.

@@ -1,16 +1,16 @@
-# Моделирование
+# Modeling
 
-![Моделирование](media/modeling.gif)
+![Modeling](media/modeling.gif)
 
-Материалы по дисциплине «Моделирование» за 3 курс.
+Materials for the third-year Modeling course.
 
-## Работы
+## Works
 
-В папке лежат PDF-отчеты `lab1`-`lab4` по учебно-исследовательским и
-лабораторным работам: постановка варианта, описание модели, расчеты,
-эксперименты и выводы по результатам моделирования.
+The directory contains PDF reports for `lab1`-`lab4` covering educational
+research and lab work: problem statement, model description, calculations,
+experiments, and conclusions based on modeling results.
 
-## Стек
+## Stack
 
 ![Modeling](https://img.shields.io/badge/Modeling-0F172A?style=for-the-badge)
 ![Simulation](https://img.shields.io/badge/Simulation-2563EB?style=for-the-badge)

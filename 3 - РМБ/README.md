@@ -1,21 +1,21 @@
-# Разработка мобильных приложений
+# Mobile Application Development
 
-Материалы по дисциплине «Разработка мобильных приложений» за 3 курс.
+Materials for the third-year Mobile Application Development course.
 
-Командный проект из 6 человек: биржевое приложение для просмотра акций,
-работы с портфелем, покупки и продажи бумаг, просмотра статистики и
-профиля пользователя. В команде были разделены зоны ответственности:
-backend, Android-приложение на Kotlin и клиентская часть на React Native.
+A six-person team project: a stock exchange application for viewing stocks,
+working with a portfolio, buying and selling securities, viewing statistics,
+and managing a user profile. The team split responsibilities across the
+backend, a Kotlin Android application, and a React Native client.
 
-Моя часть проекта - кроссплатформенное приложение на **React Native**.
+My part of the project is the cross-platform **React Native** application.
 
-## Ссылки
+## Links
 
-- [React Native приложение](https://github.com/e345ee/React-Native-humster) - моя клиентская часть: авторизация, список акций, карточка инструмента, покупка/продажа, портфель, статистика, профиль и светлая/тёмная тема.
-- [Android/Kotlin приложение](https://github.com/MaryShust/Stock-Exchange) - нативный Android-клиент коллег: экраны входа, профиля, статистики, списка акций и графиков.
-- [Общий проект и backend](https://github.com/skadibtw/stock-tracker-app) - multi-module репозиторий с mobile API, backend-сервисом портфеля, сервисом котировок, драйвером котировок и Docker-инфраструктурой.
+- [React Native application](https://github.com/e345ee/React-Native-humster) - my client part: authorization, stock list, instrument card, buy/sell flow, portfolio, statistics, profile, and light/dark theme.
+- [Android/Kotlin application](https://github.com/MaryShust/Stock-Exchange) - teammates' native Android client: sign-in, profile, statistics, stock list, and chart screens.
+- [Shared project and backend](https://github.com/skadibtw/stock-tracker-app) - multi-module repository with a mobile API, portfolio backend service, quote service, quote driver, and Docker infrastructure.
 
-## Стек моей части
+## My Part Stack
 
 ![React Native](https://img.shields.io/badge/React_Native_0.74-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Expo](https://img.shields.io/badge/Expo_51-000020?style=for-the-badge&logo=expo&logoColor=white)
@@ -27,7 +27,7 @@ backend, Android-приложение на Kotlin и клиентская час
 ![AsyncStorage](https://img.shields.io/badge/AsyncStorage-475569?style=for-the-badge)
 ![SVG](https://img.shields.io/badge/react--native--svg-FFB13B?style=for-the-badge&logo=svg&logoColor=black)
 
-## Стек Android-приложения
+## Android Application Stack
 
 ![Kotlin](https://img.shields.io/badge/Kotlin_2-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
@@ -39,7 +39,7 @@ backend, Android-приложение на Kotlin и клиентская час
 ![Coroutines](https://img.shields.io/badge/Coroutines-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
 ![Material Components](https://img.shields.io/badge/Material_Components-757575?style=for-the-badge&logo=materialdesign&logoColor=white)
 
-## Стек backend и инфраструктуры
+## Backend and Infrastructure Stack
 
 ![Kotlin](https://img.shields.io/badge/Kotlin_2.1-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
 ![Ktor](https://img.shields.io/badge/Ktor_3.1-087CFA?style=for-the-badge&logo=ktor&logoColor=white)
@@ -54,8 +54,8 @@ backend, Android-приложение на Kotlin и клиентская час
 ![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-000000?style=for-the-badge&logo=opentelemetry&logoColor=white)
 ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
 
-## Скриншоты
+## Screenshots
 
-| Карточка акции | Профиль | Статистика |
+| Stock Card | Profile | Statistics |
 |---|---|---|
-| ![Карточка акции](media/stock-details-web.jpg) | <img src="media/profile-screen.jpg" alt="Профиль пользователя" width="220"> | <img src="media/statistics-screen.jpg" alt="Статистика портфеля" width="220"> |
+| ![Stock card](media/stock-details-web.jpg) | <img src="media/profile-screen.jpg" alt="User profile" width="220"> | <img src="media/statistics-screen.jpg" alt="Portfolio statistics" width="220"> |

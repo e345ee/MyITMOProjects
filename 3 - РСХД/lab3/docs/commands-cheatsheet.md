@@ -1,40 +1,40 @@
-# Команды для демонстрации
+# Demo Commands
 
-## Проверка ролей
+## Role Check
 
-На primary:
-
-```bash
-sudo -u postgres psql -d labdb -c "SELECT pg_is_in_recovery();"
-```
-
-Ожидается `f`.
-
-На standby:
+On primary:
 
 ```bash
 sudo -u postgres psql -d labdb -c "SELECT pg_is_in_recovery();"
 ```
 
-Ожидается `t`.
+Expected: `f`.
 
-## Проверка репликации
+On standby:
 
-На primary:
+```bash
+sudo -u postgres psql -d labdb -c "SELECT pg_is_in_recovery();"
+```
+
+Expected: `t`.
+
+## Replication Check
+
+On primary:
 
 ```bash
 sudo -u postgres psql -d labdb -c "SELECT client_addr, state, sync_state FROM pg_stat_replication;"
 ```
 
-## Подключение через PgBouncer
+## PgBouncer Connection
 
-На client:
+On client:
 
 ```bash
 psql -h 127.0.0.1 -p 6432 -U appuser -d labdb
 ```
 
-## Тестовая транзакция
+## Test Transaction
 
 ```sql
 BEGIN;
@@ -44,41 +44,41 @@ VALUES (currval('clients_lab_id_seq'), 1000, 'demo_transaction');
 COMMIT;
 ```
 
-## Заполнение диска
+## Disk Filling
 
-На pg1:
+On pg1:
 
 ```bash
 bash /usr/local/bin/fill_pgdata_disk.sh /var/lib/postgresql/14/main 1
 ```
 
-## Логи PostgreSQL
+## PostgreSQL Logs
 
 ```bash
 sudo journalctl -u postgresql -n 100 | grep -Ei "no space|could not|error|fatal|panic"
 sudo find /var/lib/postgresql/14/main/log -type f -maxdepth 1 -print -exec tail -n 50 {} \;
 ```
 
-## Логи auto-failover
+## Auto-Failover Logs
 
-На client:
+On client:
 
 ```bash
 sudo tail -f /var/log/pg_auto_failover.log
 ```
 
-## Статус timer
+## Timer Status
 
 ```bash
 systemctl list-timers | grep pg-auto
 sudo systemctl status pg-auto-failover.timer
 ```
 
-## Остановка timer перед восстановлением
+## Stopping the Timer Before Recovery
 
 ```bash
 sudo systemctl stop pg-auto-failover.timer
 ```
 
 
-Скрипт `fill_pgdata_disk.sh` заполняет раздел с PGDATA, вызывает тестовую тяжёлую запись в PostgreSQL, печатает релевантные ошибки из логов и останавливает PostgreSQL на `pg1`, чтобы auto-failover гарантированно обнаружил отказ. Для отключения остановки можно запускать так: `STOP_POSTGRES_AFTER_FAIL=0 bash /usr/local/bin/fill_pgdata_disk.sh`.
+The `fill_pgdata_disk.sh` script fills the PGDATA partition, triggers a heavy test write in PostgreSQL, prints relevant errors from the logs, and stops PostgreSQL on `pg1` so auto-failover reliably detects the failure. To disable the stop step, run it as: `STOP_POSTGRES_AFTER_FAIL=0 bash /usr/local/bin/fill_pgdata_disk.sh`.

@@ -1,46 +1,56 @@
 
-# Система бронирования холодильников
+# Refrigerator Booking System
 
-Проект представляет собой прототип веб-сервиса для управления общими
-холодильниками в общежитии.\
-Система помогает учитывать продукты, распределять полки между жильцами,
-отслеживать сроки годности и снижать количество конфликтов из-за общего
-пространства.
+The project is a prototype web service for managing shared refrigerators in a
+dormitory. The system helps track products, distribute shelves between
+residents, monitor expiration dates, and reduce conflicts over shared space.
 
-Проект выполнен в рамках курса «Проектирование пользовательских
-интерфейсов» (НИУ ИТМО).\
-По результатам защиты и финального отчёта работа получила **91 балл из
-100 (оценка 5A)**.
+The project was completed as part of the User Interface Design course at ITMO
+University. Based on the defense and final report, the work received **91 out
+of 100 points (grade 5A)**.
 
-## Возможности
+## Features
 
--   Добавление и просмотр продуктов с указанием владельца и срока
-    годности\
--   Визуальное отображение занятости полок\
--   Уведомления о скором истечении срока годности и просрочке\
--   Роли пользователей: студент, староста, администратор\
--   Панель контроля с аналитикой заполненности холодильника\
--   Назначение старосты и управление холодильниками (для администратора)
+- Adding and viewing products with owner and expiration date information
+- Visual shelf occupancy display
+- Notifications for upcoming expiration and overdue products
+- User roles: student, dorm monitor, administrator
+- Dashboard with refrigerator occupancy analytics
+- Dorm monitor assignment and refrigerator management for administrators
 
-## Технологический стек
+## Technology Stack
 
--   React\
--   TypeScript\
--   Vite\
--   HTML / CSS
+- React
+- TypeScript
+- Vite
+- HTML / CSS
 
-## Запуск локально
+## Local Run
 
-Требования: - Node.js 18+ (лучше 20 LTS)\
-- npm (идёт вместе с Node)
+Requirements:
 
-Шаги: 1. Установите зависимости: `bash    npm install` 2. Запустите
-dev-сервер: `bash    npm run dev` 3. Откройте приложение в браузере: -
-по умолчанию Vite стартует на `http://localhost:3000` (порт задан в
-`vite.config.ts`).
+- Node.js 18+ (20 LTS is preferred)
+- npm (comes with Node)
 
-## Сборка (опционально)
+Steps:
 
-``` bash
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the dev server:
+
+```bash
+npm run dev
+```
+
+3. Open the application in a browser. By default, Vite starts at
+   `http://localhost:3000` (the port is configured in `vite.config.ts`).
+
+## Build (Optional)
+
+```bash
 npm run build
 ```

@@ -1,19 +1,19 @@
-# Основы программной инженерии
+# Software Engineering Fundamentals
 
-![Основы программной инженерии](media/opi.jpg)
+![Software Engineering Fundamentals](media/opi.jpg)
 
-Материалы по дисциплине «Основы программной инженерии» за 2 курс.
+Materials for the second-year Software Engineering Fundamentals course.
 
-## Лабораторные
+## Labs
 
-- `lab1/report.pdf` - отчет по лабораторной работе №1.
-- [`lab2`](https://github.com/e345ee/repo-branching-simulation) - сабмодуль с
-  симуляцией ветвления репозитория и Git-процессов.
-- `lab3-lab4/report4.pdf` - отчет по лабораторной работе №4.
+- `lab1/report.pdf` - report for lab work 1.
+- [`lab2`](https://github.com/e345ee/repo-branching-simulation) - submodule
+  with a simulation of repository branching and Git processes.
+- `lab3-lab4/report4.pdf` - report for lab work 4.
 - [`lab3-lab4/lab3-lab4`](https://github.com/e345ee/jsf-webapp-pointcatcher) -
-  проектная часть на базе Java Web-приложения PointCatcher.
+  project component based on the PointCatcher Java web application.
 
-## Стек
+## Stack
 
 ![Software Engineering](https://img.shields.io/badge/Software_Engineering-0F172A?style=for-the-badge)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)

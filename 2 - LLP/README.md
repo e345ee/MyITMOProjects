@@ -1,30 +1,30 @@
-# Низкоуровневое программирование
+# Low-Level Programming
 
 ![LLP](media/llp.gif)
 
-![LLP: часть 2](media/llp2.gif)
+![LLP: part 2](media/llp2.gif)
 
-Материалы по дисциплине «Low-level programming» за 2 курс.
+Materials for the second-year Low-Level Programming course.
 
-## Лабораторные
+## Labs
 
-- `assignment-1-io-library` - библиотека ввода-вывода на x86-64 Assembly:
-  строки, числа, парсинг, печать и работа с системными вызовами Linux.
-- `assignment-2-dictionary` - статический словарь на Assembly: связный
-  список, макросы, поиск по ключу и консольный интерфейс.
-- `assignment-3-image-transform` - утилита на C для чтения BMP и
-  геометрических преобразований изображения.
-- `assignment-4-memory-allocator` - собственный аллокатор памяти на C:
-  `mmap`, блоки, заголовки, объединение свободных областей и тесты.
-- `seminar4` - семинарские материалы по Assembly и тестированию.
+- `assignment-1-io-library` - x86-64 Assembly input/output library: strings,
+  numbers, parsing, printing, and Linux system calls.
+- `assignment-2-dictionary` - static Assembly dictionary: linked list, macros,
+  key lookup, and console interface.
+- `assignment-3-image-transform` - C utility for reading BMP files and applying
+  geometric image transformations.
+- `assignment-4-memory-allocator` - custom C memory allocator: `mmap`, blocks,
+  headers, free-region merging, and tests.
+- `seminar4` - seminar materials on Assembly and testing.
 
-## Стек
+## Stack
 
-![C](https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=black)
 ![Assembly](https://img.shields.io/badge/x86--64_Assembly-525252?style=for-the-badge)
-![Linux ABI](https://img.shields.io/badge/Linux_ABI-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Make](https://img.shields.io/badge/Make-064F8C?style=for-the-badge)
+![NASM](https://img.shields.io/badge/NASM-111827?style=for-the-badge)
+![Linux Syscalls](https://img.shields.io/badge/Linux_Syscalls-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![C](https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=black)
 ![CMake](https://img.shields.io/badge/CMake-064F8C?style=for-the-badge&logo=cmake&logoColor=white)
+![Make](https://img.shields.io/badge/Make-0F172A?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python_Tests-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![BMP](https://img.shields.io/badge/BMP-475569?style=for-the-badge)
-![mmap](https://img.shields.io/badge/mmap-7C2D12?style=for-the-badge)
+![Memory Allocator](https://img.shields.io/badge/Memory_Allocator-7C3AED?style=for-the-badge)
