@@ -1,0 +1,129 @@
+\thispagestyle{empty}
+
+\newgeometry{top=0.2cm, bottom=0.5cm, left=0.5cm, right=0.5cm} 
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0em}
+
+
+
+\noindent
+\begin{minipage}[t]{0.3\textwidth}
+\end{minipage}%
+\hfill
+%\vrule
+\hfill
+\begin{minipage}[t]{0.68\textwidth}
+\begin{flushleft}
+    \vspace{6em}
+    \textbf{\Huge{Решение задач}\\
+    \large{M436--M440; Ф448, Ф450--Ф452}}
+    \vspace{6em}
+\end{flushleft}
+    
+
+
+
+
+\end{minipage}
+
+\noindent
+\begin{minipage}[t]{0.3\textwidth}
+\textbf{М436.} \textit{Дано 20 чисел $a_1, a_2, ... , a_10, b_1, b_2 ... , b_10$. Докажите, что множество из 100 чисел (необязательно различных) $a_1 + b_1, a_1 + b_2, ... , a_10 + b_10$ можно разбить на 10 подмножеств, по 10 чисел в каждом так, чтобы сумма чисел в каждом подмножестве была одной и той же.} 
+
+\end{minipage}%
+\hfill
+%\vrule
+\hfill
+\begin{minipage}[t]{0.65\textwidth}
+Запишем наши 100 чисел в квадратичную таблицу так, как изображено на рисунке 1; на пересечении $i-$й строки и $j-$го столбца поставим число $a_i + b_j$. Образуем теперь 10 подмножеств так, как показано на рисунке 2 (на рисунке клетки-числа, относящиеся к одному и тому же подмножеству, обозначены одной и той же цифрой). Легко видеть, что в каждом столбце(в каждой строке) есть представители всех подмножеств, так что индекс $i$ и $j$ чисел $a_i + b_j$, входящих в каждое из подмножест, принимают все значения от 1 до 10 (ровно по одному разу). Поэтому сумма чисел в каждом подмножестве одна и та же: $a_1 + a_2 + .. + a_10 + b_1 + b_2 + b_10$.
+\begin{flushright}
+   \small\textit{C. Берколайко}
+\end{flushright}
+
+\end{minipage}
+\vspace{3em}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+ \begin{center}
+ 
+        \begin{tabular}{ r|c|c|c|c c c|c| }
+\multicolumn{1}{r}{}
+ &  \multicolumn{1}{c}{$b_1$}
+ & \multicolumn{1}{c}{$b_2$} 
+ & \multicolumn{1}{c}{$b_3$} 
+ & \multicolumn{1}{c}{\textbf{.}} 
+ & \multicolumn{1}{c}{\textbf{.}}
+ & \multicolumn{1}{c}{\textbf{.}}
+ & \multicolumn{1}{c}{$b_{10}$} \\
+\cline{2-8}
+$a_1$ & $a_1 + b_1$ & $a_2 + b_2$ & $a_1 + b_3$ & \textbf{.} & \textbf{.} & \textbf{.} & $a_1 + b_{10}$  \\ [4.5ex]
+\cline{2-8}
+$a_2$ & $a_2 + b_1$ & $a_2 + b_2$ & $a_2 + b_3$ & \textbf{.} & \textbf{.} & \textbf{.} & $a_2 + b_{10}$   \\[4.5ex]
+\cline{2-8}
+$a_3$ &$a_1 + b_1$ & $a_3 + b_2$ & $a_3 + b_3$ & \textbf{.} & \textbf{.} & \textbf{.} & $a_3 + b_{10}$   \\[4.5ex]
+\cline{2-8}
+ \textbf{.}& \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} \\[4.5ex]
+
+\textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} \\[4.5ex]
+
+\textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} & \textbf{.} \\[4.5ex]
+\cline{2-8}
+$a_{10}$ & $a_1 + b_1$ & $a_{10} + b_2$ & $a_{10} + b_3$ & \textbf{.} & \textbf{.} & \textbf{.} & $a_{10} + b_{10}$    \\[4.5ex]
+\cline{2-8}
+
+\end{tabular}
+        \begin{flushleft}
+            \textbf{Рис.1.}\\
+        \end{flushleft}
+        
+    \end{center}
+\end{minipage}%
+\hfill
+%\vrule
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c|c|c|c|c|c|c|}
+        \hline
+         1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ [2ex] \hline 
+         10 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\ [2ex] \hline
+          9 & 10 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\[2ex] \hline
+           8 & 9 & 10 & 1 & 2 & 3 & 4 & 5 & 6 & 7\\[2ex] \hline
+            7 & 8 & 9 & 10 & 1 & 2 & 3 & 4 & 5 & 6\\ [2ex] \hline
+             6 & 7 & 8 & 9 & 10 & 1 & 2 & 3 & 4 & 5\\ [2ex] \hline
+            5 & 6 & 7 & 8 & 9 & 10 & 1 & 2 & 3 & 4\\ [2ex] \hline
+               4 & 5 & 6 & 7 & 8 & 9 & 10 & 1 & 2 & 3\\ [2ex] \hline
+                3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 1 & 2\\ [2ex] \hline
+                2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 1\\ [2ex] \hline
+        \end{tabular}\\
+        \begin{flushleft}
+            \textbf{Рис.2.}\\
+        \end{flushleft}
+        
+    \end{center}
+    
+\end{minipage}
+
+
+\vspace{\fill}
+\begin{flushleft}
+   \textbf{\textsf{\Large{30}}}
+\end{flushleft}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

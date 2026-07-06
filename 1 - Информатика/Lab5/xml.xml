@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<timetable>
+    <day>Вторник</day>
+    <day>Вторник1</day>
+    <day>Вторник2</day>
+    <day>Вторник3</day>
+    <lessons>
+        <Subject1>
+            <time>8:20-9:50</time>
+            <time>8:20-9:50</time>
+            <time>8:20-9:50</time>
+            <time>8:20-9:50</time>
+            <time>8:20-9:50</time>
+            <cabinet>Актовый зал</cabinet>
+            <adress>ул. Ломоносова, д.9, лит. А</adress>
+            <name>ИНФОРМАТИКА</name>
+            <week>четная</week>
+            <teacher>Балакшин Павел Валерьевич</teacher>
+            <format>Очный</format>
+        </Subject1>
+        <Subject2>
+            <timе>11:40-13:30</timе>
+            <cаbinet>ауд. 1223</cаbinet>
+            <аdress> ул. Ломоносова, д.9, лит. М</аdress>
+            <nаme>ПРОГРАММИРОВАНИЕ</nаme>
+            <wеek>чётная</wеek>
+            <teаcher>Письмак Алексей Евгеньевич</teаcher>
+            <formаt>Очно-дистанционный</formаt>
+        </Subjеct2>
+    </lеssons>
+</timetable>

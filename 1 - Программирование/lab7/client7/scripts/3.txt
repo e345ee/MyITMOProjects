@@ -1,0 +1,44 @@
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
+generate 10
+clear
