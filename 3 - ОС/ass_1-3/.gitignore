@@ -1,0 +1,25 @@
+*~
+_*
+*.o
+*.d
+*.asm
+*.sym
+*.img
+vectors.S
+bootblock
+entryother
+initcode
+initcode.out
+kernelmemfs
+mkfs
+kernel/kernel
+user/usys.S
+.gdbinit
+
+# Clangd
+compile_commands.json
+compile_commands.events.json
+.cache
+
+# Python
+__pycache__/

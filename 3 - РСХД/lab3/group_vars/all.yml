@@ -1,0 +1,37 @@
+
+pg_version: "14"
+pg_service_name: "postgresql"
+pg_ctl: "/usr/lib/postgresql/{{ pg_version }}/bin/pg_ctl"
+pgdata: "/var/lib/postgresql/{{ pg_version }}/main"
+pg_config_dir: "/etc/postgresql/{{ pg_version }}/main"
+
+pg1_public_ip: "203.0.113.10"
+pg2_public_ip: "203.0.113.11"
+client_public_ip: "203.0.113.12"
+
+pg1_private_ip: "10.0.0.10"
+pg2_private_ip: "10.0.0.11"
+client_private_ip: "10.0.0.12"
+
+postgres_superuser: "postgres"
+db_name: "labdb"
+app_user: "appuser"
+app_password: "<APP_PASSWORD>"
+replication_user: "replicator"
+replication_password: "<REPLICATION_PASSWORD>"
+
+pgbouncer_listen_addr: "127.0.0.1"
+pgbouncer_listen_port: 6432
+pgbouncer_pool_mode: "transaction"
+pgbouncer_auth_type: "plain"
+pgbouncer_config: "/etc/pgbouncer/pgbouncer.ini"
+pgbouncer_userlist: "/etc/pgbouncer/userlist.txt"
+
+failover_ssh_user: "root"
+failover_check_interval_seconds: 5
+failover_log_file: "/var/log/pg_auto_failover.log"
+failover_state_file: "/var/lib/pgbouncer/current_primary"
+
+diskfill_free_percent_target: 1
+
+configure_ufw: true

@@ -1,0 +1,78 @@
+- name: Очищаю клиентскую машину
+  hosts: client
+  become: true
+  tasks:
+    - name: Останавливаю timer failover
+      ansible.builtin.systemd:
+        name: pg-auto-failover.timer
+        state: stopped
+        enabled: false
+        daemon_reload: true
+      failed_when: false
+
+    - name: Останавливаю service failover
+      ansible.builtin.systemd:
+        name: pg-auto-failover.service
+        state: stopped
+      failed_when: false
+
+    - name: Останавливаю PgBouncer
+      ansible.builtin.service:
+        name: pgbouncer
+        state: stopped
+        enabled: false
+      failed_when: false
+
+    - name: Удаляю файлы failover
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /usr/local/bin/pg_auto_failover.sh
+        - /usr/local/bin/fill_pgdata_disk.sh
+        - /etc/systemd/system/pg-auto-failover.service
+        - /etc/systemd/system/pg-auto-failover.timer
+        - "{{ failover_state_file }}"
+        - "{{ failover_log_file }}"
+        - /root/.pgpass
+
+    - name: Удаляю папку PgBouncer
+      ansible.builtin.file:
+        path: /var/lib/pgbouncer
+        state: absent
+
+    - name: Удаляю конфиг PgBouncer
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ pgbouncer_config }}"
+        - "{{ pgbouncer_userlist }}"
+
+    - name: Обновляю systemd
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+- name: Очищаю Postgres на машинах 1 и 2
+  hosts: pg_primary:pg_standby
+  become: true
+  tasks:
+    - name: Удаляю кластер Postgres
+      ansible.builtin.shell: "pg_dropcluster --stop {{ pg_version }} main || true"
+      changed_when: true
+      failed_when: false
+
+    - name: Удаляю остатки данных Postgres
+      ansible.builtin.file:
+        path: "{{ pgdata }}"
+        state: absent
+
+    - name: Удаляю остатки конфигов Postgres
+      ansible.builtin.file:
+        path: "{{ pg_config_dir }}"
+        state: absent
+
+    - name: Сбрасываю firewall
+      when: configure_ufw | bool
+      ansible.builtin.shell: "ufw --force reset"
+      changed_when: true

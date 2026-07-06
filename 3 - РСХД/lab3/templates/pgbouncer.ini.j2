@@ -1,0 +1,19 @@
+[databases]
+{{ db_name }} = host={{ pg1_private_ip }} port=5432 dbname={{ db_name }}
+{{ db_name }}_rw = host={{ pg1_private_ip }} port=5432 dbname={{ db_name }}
+{{ db_name }}_ro = host={{ pg2_private_ip }} port=5432 dbname={{ db_name }}
+
+[pgbouncer]
+listen_addr = {{ pgbouncer_listen_addr }}
+listen_port = {{ pgbouncer_listen_port }}
+auth_type = {{ pgbouncer_auth_type }}
+auth_file = {{ pgbouncer_userlist }}
+logfile = /var/log/postgresql/pgbouncer.log
+pidfile = /var/run/postgresql/pgbouncer.pid
+pool_mode = {{ pgbouncer_pool_mode }}
+max_client_conn = 100
+default_pool_size = 20
+ignore_startup_parameters = extra_float_digits
+admin_users = {{ app_user }}
+log_connections = 1
+log_disconnections = 1

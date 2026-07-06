@@ -1,0 +1,4 @@
+*.retry
+*.log
+.DS_Store
+.ssh/

@@ -1,0 +1,10 @@
+[Unit]
+Description=Лабораторная работа 3: периодическая проверка доступности PostgreSQL
+
+[Timer]
+OnBootSec=10
+OnUnitActiveSec={{ failover_check_interval_seconds }}
+AccuracySec=1
+
+[Install]
+WantedBy=timers.target

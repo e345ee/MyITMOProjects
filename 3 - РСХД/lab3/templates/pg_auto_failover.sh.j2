@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -u
+
+PRIMARY_IP="{{ pg1_private_ip }}"
+STANDBY_IP="{{ pg2_private_ip }}"
+SSH_USER="{{ failover_ssh_user }}"
+DB_NAME="{{ db_name }}"
+DB_USER="{{ app_user }}"
+DB_PORT="5432"
+PGDATA="{{ pgdata }}"
+PG_CTL="{{ pg_ctl }}"
+PGBOUNCER_CONFIG="{{ pgbouncer_config }}"
+LOG_FILE="{{ failover_log_file }}"
+LOCK_FILE="/var/run/pg_auto_failover.lock"
+STATE_FILE="{{ failover_state_file }}"
+
+mkdir -p "$(dirname "$STATE_FILE")"
+touch "$LOG_FILE"
+
+exec 9>"$LOCK_FILE"
+if ! flock -n 9; then
+  exit 0
+fi
+
+log() {
+  echo "$(date '+%Y-%m-%d %H:%M:%S') $*" >> "$LOG_FILE"
+}
+
+CURRENT_PRIMARY="$(cat "$STATE_FILE" 2>/dev/null || echo "$PRIMARY_IP")"
+
+if [ "$CURRENT_PRIMARY" = "$STANDBY_IP" ]; then
+  log "Текущий primary уже $STANDBY_IP. Действие не требуется."
+  exit 0
+fi
+
+log "Проверяем основной узел $PRIMARY_IP..."
+
+if pg_isready -h "$PRIMARY_IP" -p "$DB_PORT" -d "$DB_NAME" -q; then
+  log "Основной узел $PRIMARY_IP доступен."
+  echo "$PRIMARY_IP" > "$STATE_FILE"
+  exit 0
+fi
+
+log "Основной узел $PRIMARY_IP недоступен. Проверяем резервный узел $STANDBY_IP..."
+
+if ! pg_isready -h "$STANDBY_IP" -p "$DB_PORT" -q; then
+  log "Резервный узел $STANDBY_IP тоже недоступен. Прерываем выполнение."
+  exit 1
+fi
+
+log "Резервный узел $STANDBY_IP доступен. Выполняем promote через SSH..."
+ssh -o BatchMode=yes -o ConnectTimeout=5 "$SSH_USER@$STANDBY_IP" "sudo -u postgres $PG_CTL promote -D $PGDATA" >> "$LOG_FILE" 2>&1
+PROMOTE_RC=$?
+if [ "$PROMOTE_RC" -ne 0 ]; then
+  log "Команда promote вернула rc=$PROMOTE_RC. Возможно, узел уже повышен; всё равно проверяем состояние."
+fi
+
+sleep 5
+RECOVERY_STATUS="$(psql -h "$STANDBY_IP" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT pg_is_in_recovery();" 2>>"$LOG_FILE" | tr -d '[:space:]')"
+
+if [ "$RECOVERY_STATUS" != "f" ]; then
+  log "Promote не выполнен или не завершён. pg_is_in_recovery=$RECOVERY_STATUS"
+  exit 1
+fi
+
+log "Резервный узел $STANDBY_IP успешно повышен до primary. Переключаем PgBouncer."
+sed -i "s/host=$PRIMARY_IP/host=$STANDBY_IP/g" "$PGBOUNCER_CONFIG"
+systemctl restart pgbouncer
+
+echo "$STANDBY_IP" > "$STATE_FILE"
+log "PgBouncer переключён на $STANDBY_IP и перезапущен."

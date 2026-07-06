@@ -1,0 +1,7 @@
+[Unit]
+Description=Лабораторная работа 3: проверка доступности PostgreSQL и PgBouncer
+After=network-online.target pgbouncer.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/pg_auto_failover.sh

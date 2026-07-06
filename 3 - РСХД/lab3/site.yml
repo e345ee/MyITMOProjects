@@ -1,0 +1,450 @@
+- name: Проверяю сеть
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Проверяю доступ к машине
+      ansible.builtin.ping:
+
+    - name: Показываю адрес машины
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} public={{ ansible_host | default('n/a') }} default_ipv4={{ ansible_default_ipv4.address | default('n/a') }}"
+
+- name: Настраиваю SSH ключи
+  hosts: client
+  become: true
+  tasks:
+    - name: Ставлю SSH клиент
+      ansible.builtin.apt:
+        name: openssh-client
+        state: present
+        update_cache: true
+
+    - name: Создаю папку SSH
+      ansible.builtin.file:
+        path: /root/.ssh
+        state: directory
+        owner: root
+        group: root
+        mode: "0700"
+
+    - name: Создаю SSH ключ
+      ansible.builtin.command: ssh-keygen -t ed25519 -N "" -f /root/.ssh/id_ed25519
+      args:
+        creates: /root/.ssh/id_ed25519
+
+    - name: Читаю публичный ключ
+      ansible.builtin.slurp:
+        src: /root/.ssh/id_ed25519.pub
+      register: client_root_public_key
+
+    - name: Добавляю машины в known_hosts
+      ansible.builtin.shell: |
+        ssh-keygen -R {{ pg1_private_ip }} || true
+        ssh-keygen -R {{ pg2_private_ip }} || true
+        ssh-keyscan -H {{ pg1_private_ip }} {{ pg2_private_ip }} >> /root/.ssh/known_hosts
+        sort -u /root/.ssh/known_hosts -o /root/.ssh/known_hosts
+      changed_when: true
+
+- name: Раздаю SSH ключи
+  hosts: pg_primary:pg_standby
+  become: true
+  tasks:
+    - name: Создаю папку SSH
+      ansible.builtin.file:
+        path: /root/.ssh
+        state: directory
+        owner: root
+        group: root
+        mode: "0700"
+
+    - name: Добавляю ключ клиента
+      ansible.builtin.authorized_key:
+        user: root
+        key: "{{ hostvars['client']['client_root_public_key']['content'] | b64decode }}"
+        state: present
+
+- name: Настраиваю Postgres на машине 1
+  hosts: pg_primary
+  become: true
+  tasks:
+    - name: Ставлю Postgres
+      ansible.builtin.apt:
+        name:
+          - postgresql
+          - postgresql-contrib
+          - python3-psycopg2
+          - acl
+          - ufw
+        state: present
+        update_cache: true
+
+    - name: Проверяю кластер Postgres
+      ansible.builtin.stat:
+        path: "{{ pgdata }}/PG_VERSION"
+      register: pg_version_file
+
+    - name: Создаю кластер Postgres
+      ansible.builtin.shell: |
+        pg_dropcluster --stop {{ pg_version }} main || true
+        pg_createcluster {{ pg_version }} main --start
+      when: not pg_version_file.stat.exists
+      changed_when: true
+
+    - name: Останавливаю Postgres
+      ansible.builtin.service:
+        name: "{{ pg_service_name }}"
+        state: stopped
+
+    - name: Настраиваю postgresql.conf
+      ansible.builtin.template:
+        src: templates/postgresql-primary.conf.j2
+        dest: "{{ pg_config_dir }}/postgresql.conf"
+        owner: postgres
+        group: postgres
+        mode: "0644"
+
+    - name: Настраиваю pg_hba.conf
+      ansible.builtin.template:
+        src: templates/pg_hba-primary.conf.j2
+        dest: "{{ pg_config_dir }}/pg_hba.conf"
+        owner: postgres
+        group: postgres
+        mode: "0640"
+
+    - name: Запускаю Postgres
+      ansible.builtin.service:
+        name: "{{ pg_service_name }}"
+        state: started
+        enabled: true
+
+    - name: Создаю пользователя репликации
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "{{ replication_user }}"
+        password: "{{ replication_password }}"
+        role_attr_flags: "REPLICATION,LOGIN"
+        state: present
+
+    - name: Создаю пользователя базы
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "{{ app_user }}"
+        password: "{{ app_password }}"
+        state: present
+
+    - name: Создаю базу
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ db_name }}"
+        owner: "{{ app_user }}"
+        state: present
+
+    - name: Копирую SQL
+      ansible.builtin.copy:
+        src: files/init_labdb.sql
+        dest: /tmp/init_labdb.sql
+        mode: "0644"
+
+    - name: Создаю тестовые таблицы
+      become_user: postgres
+      ansible.builtin.shell: "psql -d {{ db_name }} -v ON_ERROR_STOP=1 -f /tmp/init_labdb.sql"
+      changed_when: true
+
+    - name: Выдаю права пользователю
+      become_user: postgres
+      ansible.builtin.shell: |
+        psql -d {{ db_name }} -v ON_ERROR_STOP=1 <<SQL
+        GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO {{ app_user }};
+        GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO {{ app_user }};
+        ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO {{ app_user }};
+        ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO {{ app_user }};
+        SQL
+      changed_when: true
+
+    - name: Настраиваю firewall
+      when: configure_ufw | bool
+      block:
+        - ansible.builtin.ufw:
+            rule: allow
+            name: OpenSSH
+        - ansible.builtin.ufw:
+            rule: allow
+            from_ip: "{{ client_private_ip }}"
+            to_port: "5432"
+            proto: tcp
+        - ansible.builtin.ufw:
+            rule: allow
+            from_ip: "{{ pg2_private_ip }}"
+            to_port: "5432"
+            proto: tcp
+        - ansible.builtin.ufw:
+            state: enabled
+            policy: deny
+
+- name: Настраиваю Postgres на машине 2
+  hosts: pg_standby
+  become: true
+  tasks:
+    - name: Ставлю Postgres
+      ansible.builtin.apt:
+        name:
+          - postgresql
+          - postgresql-contrib
+          - python3-psycopg2
+          - acl
+          - ufw
+        state: present
+        update_cache: true
+
+    - name: Проверяю кластер Postgres
+      ansible.builtin.stat:
+        path: "{{ pgdata }}/PG_VERSION"
+      register: pg_version_file
+
+    - name: Создаю кластер Postgres
+      ansible.builtin.shell: |
+        pg_dropcluster --stop {{ pg_version }} main || true
+        pg_createcluster {{ pg_version }} main --start
+      when: not pg_version_file.stat.exists
+      changed_when: true
+
+    - name: Останавливаю Postgres
+      ansible.builtin.service:
+        name: "{{ pg_service_name }}"
+        state: stopped
+
+    - name: Очищаю PGDATA
+      ansible.builtin.file:
+        path: "{{ pgdata }}"
+        state: absent
+
+    - name: Создаю PGDATA
+      ansible.builtin.file:
+        path: "{{ pgdata }}"
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: "0700"
+
+    - name: Копирую базу с машины 1
+      become_user: postgres
+      ansible.builtin.shell: |
+        export PGPASSWORD='{{ replication_password }}'
+        pg_basebackup -h {{ pg1_private_ip }} -D {{ pgdata }} -U {{ replication_user }} -P -R -X stream
+      args:
+        executable: /bin/bash
+      changed_when: true
+
+    - name: Настраиваю postgresql.conf
+      ansible.builtin.template:
+        src: templates/postgresql-standby.conf.j2
+        dest: "{{ pg_config_dir }}/postgresql.conf"
+        owner: postgres
+        group: postgres
+        mode: "0644"
+
+    - name: Настраиваю pg_hba.conf
+      ansible.builtin.template:
+        src: templates/pg_hba-standby.conf.j2
+        dest: "{{ pg_config_dir }}/pg_hba.conf"
+        owner: postgres
+        group: postgres
+        mode: "0640"
+
+    - name: Запускаю Postgres
+      ansible.builtin.service:
+        name: "{{ pg_service_name }}"
+        state: started
+        enabled: true
+
+    - name: Жду Postgres на машине 2
+      become_user: postgres
+      ansible.builtin.shell: "pg_isready -q -p 5432"
+      register: pg2_ready
+      retries: 20
+      delay: 2
+      until: pg2_ready.rc == 0
+      changed_when: false
+
+    - name: Настраиваю firewall
+      when: configure_ufw | bool
+      block:
+        - ansible.builtin.ufw:
+            rule: allow
+            name: OpenSSH
+        - ansible.builtin.ufw:
+            rule: allow
+            from_ip: "{{ client_private_ip }}"
+            to_port: "5432"
+            proto: tcp
+        - ansible.builtin.ufw:
+            rule: allow
+            from_ip: "{{ pg1_private_ip }}"
+            to_port: "5432"
+            proto: tcp
+        - ansible.builtin.ufw:
+            state: enabled
+            policy: deny
+
+- name: Настраиваю клиентскую машину
+  hosts: client
+  become: true
+  tasks:
+    - name: Ставлю пакеты клиента
+      ansible.builtin.apt:
+        name:
+          - pgbouncer
+          - postgresql-client
+          - openssh-client
+          - ufw
+        state: present
+        update_cache: true
+
+    - name: Настраиваю PgBouncer
+      ansible.builtin.template:
+        src: templates/pgbouncer.ini.j2
+        dest: "{{ pgbouncer_config }}"
+        owner: postgres
+        group: postgres
+        mode: "0640"
+
+    - name: Настраиваю пользователей PgBouncer
+      ansible.builtin.template:
+        src: templates/userlist.txt.j2
+        dest: "{{ pgbouncer_userlist }}"
+        owner: postgres
+        group: postgres
+        mode: "0640"
+
+    - name: Настраиваю запуск PgBouncer
+      ansible.builtin.copy:
+        content: "START=1
+"
+        dest: /etc/default/pgbouncer
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Настраиваю папки PgBouncer
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: "0755"
+      loop:
+        - /var/run/postgresql
+        - /var/log/postgresql
+
+    - name: Создаю pgpass
+      ansible.builtin.template:
+        src: templates/pgpass.j2
+        dest: /root/.pgpass
+        owner: root
+        group: root
+        mode: "0600"
+
+    - name: Создаю рабочую папку
+      ansible.builtin.file:
+        path: /var/lib/pgbouncer
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Записываю текущий primary
+      ansible.builtin.copy:
+        content: "{{ pg1_private_ip }}\n"
+        dest: "{{ failover_state_file }}"
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Копирую скрипт failover
+      ansible.builtin.template:
+        src: templates/pg_auto_failover.sh.j2
+        dest: /usr/local/bin/pg_auto_failover.sh
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Копирую скрипт сбоя
+      ansible.builtin.copy:
+        src: scripts/fill_pgdata_disk.sh
+        dest: /usr/local/bin/fill_pgdata_disk.sh
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Настраиваю service failover
+      ansible.builtin.template:
+        src: templates/pg-auto-failover.service.j2
+        dest: /etc/systemd/system/pg-auto-failover.service
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Настраиваю timer failover
+      ansible.builtin.template:
+        src: templates/pg-auto-failover.timer.j2
+        dest: /etc/systemd/system/pg-auto-failover.timer
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Запускаю PgBouncer
+      ansible.builtin.service:
+        name: pgbouncer
+        state: restarted
+        enabled: true
+
+    - name: Запускаю timer failover
+      ansible.builtin.systemd:
+        daemon_reload: true
+        name: pg-auto-failover.timer
+        state: started
+        enabled: true
+
+    - name: Настраиваю firewall
+      when: configure_ufw | bool
+      block:
+        - ansible.builtin.ufw:
+            rule: allow
+            name: OpenSSH
+        - ansible.builtin.ufw:
+            state: enabled
+            policy: deny
+
+- name: Копирую скрипт сбоя на машину 1
+  hosts: pg_primary
+  become: true
+  tasks:
+    - name: Копирую скрипт сбоя
+      ansible.builtin.copy:
+        src: scripts/fill_pgdata_disk.sh
+        dest: /usr/local/bin/fill_pgdata_disk.sh
+        owner: root
+        group: root
+        mode: "0755"
+
+- name: Проверяю кластер
+  hosts: all
+  become: true
+  tasks:
+    - name: Проверяю машину 1
+      when: inventory_hostname in groups['pg_primary']
+      become_user: postgres
+      ansible.builtin.shell: "psql -d {{ db_name }} -tAc 'SELECT pg_is_in_recovery();'"
+      register: primary_recovery
+      changed_when: false
+
+    - name: Проверяю машину 2
+      when: inventory_hostname in groups['pg_standby']
+      become_user: postgres
+      ansible.builtin.shell: "psql -d {{ db_name }} -tAc 'SELECT pg_is_in_recovery();'"
+      register: standby_recovery
+      changed_when: false
+
+    - name: Показываю роли Postgres
+      ansible.builtin.debug:
+        msg: "primary recovery={{ primary_recovery.stdout | default('n/a') }}, standby recovery={{ standby_recovery.stdout | default('n/a') }}"

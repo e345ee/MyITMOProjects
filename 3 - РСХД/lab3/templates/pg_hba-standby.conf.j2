@@ -1,0 +1,8 @@
+local   all             postgres                                peer
+local   all             all                                     peer
+host    all             all             127.0.0.1/32            scram-sha-256
+host    all             all             ::1/128                 scram-sha-256
+
+host    {{ db_name }}   {{ app_user }}  {{ client_private_ip }}/32       scram-sha-256
+
+host    replication     {{ replication_user }} {{ pg1_private_ip }}/32   scram-sha-256
