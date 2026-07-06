@@ -1,0 +1,84 @@
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+__MACOSX/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+*.bak
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Node.js and frontend
+node_modules/
+dist/
+coverage/
+.next/
+.nuxt/
+.expo/
+.turbo/
+.parcel-cache/
+.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Java, Kotlin, Gradle, Maven
+.gradle/
+build/
+out/
+target/
+*.class
+
+# C, C++, native builds
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
